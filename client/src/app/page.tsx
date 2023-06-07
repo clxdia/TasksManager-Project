@@ -12,6 +12,7 @@ interface Task {
 
 async function fetchData(url: string): Promise<Task[]> {
   const res = await fetch(url);
+  console.log(url);
   if (!res.ok) {
     throw new Error("Failed to fetch data");
   }
@@ -25,8 +26,9 @@ export default function TasksPage(): JSX.Element {
     const fetchTasks = async () => {
       try {
         const fetchedTasks = await fetchData(
-          `${process.env.MONGODB_URL}/tasks`
+          process.env.MONGODB_URL + "/tasks"
         );
+
         setTasks(fetchedTasks);
       } catch (error) {
         console.error("Error fetching tasks:", error);
