@@ -24,7 +24,9 @@ export default function TasksPage(): JSX.Element {
   useEffect(() => {
     const fetchTasks = async () => {
       try {
-        const fetchedTasks = await fetchData("http://localhost:3005/tasks");
+        const fetchedTasks = await fetchData(
+          `${process.env.MONGODB_URL}/tasks`
+        );
         setTasks(fetchedTasks);
       } catch (error) {
         console.error("Error fetching tasks:", error);
