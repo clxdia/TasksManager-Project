@@ -65,21 +65,41 @@ app.post("/users", (req, res) => {
 app.post("/users", async (req, res) => {
   const { email, password } = req.body;
 
-  const data = {
-    email: email,
-    password: password,
-  };
-
   try {
-    const check = await collection.findOne({ email: email });
-    if (check) {
+    const user = await collection.findOne({ email });
+
+    if (user) {
+      // User with the same email already exists
       res.json("exist");
     } else {
-      res.json("notexist");
-      await collection.insertMany([data]);
+      // Insert a new user into the "users" collection
+      await collection.insertOne({ email, password });
+      res.json("success");
     }
   } catch (e) {
-    res.json("notexist");
+    res.status(500).json("error"); // Error occurred
+    console.log(e);
+  }
+});
+
+app.post("/login", async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    const user = await collection.findOne({ email });
+
+    if (user) {
+      // Check if the password matches
+      if (user.password === password) {
+        res.json("success"); // Successful login
+      } else {
+        res.json("invalid"); // Invalid password
+      }
+    } else {
+      res.json("invalid"); // User not found
+    }
+  } catch (e) {
+    res.status(500).json("error"); // Error occurred
     console.log(e);
   }
 });
