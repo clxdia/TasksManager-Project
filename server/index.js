@@ -1,6 +1,7 @@
 import express from "express";
 import { connectToDb, getDatabase } from "./mongodb/database.js";
 import cors from "cors";
+import { Db } from "mongodb";
 
 const app = express();
 
@@ -45,5 +46,18 @@ app.get("/tasks", (req, res) => {
     })
     .catch(() => {
       res.status(500).json({ error: "could not fetch tasks" });
+    });
+});
+
+app.post("/users", (req, res) => {
+  let user = req.body;
+  database
+    .collection("users")
+    .insertOne(user)
+    .then((result) => {
+      res.status(201).json(result);
+    })
+    .catch((err) => {
+      res.status(500).json({ error: `could not add user; error: ${err}` });
     });
 });
