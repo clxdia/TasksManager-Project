@@ -61,3 +61,25 @@ app.post("/users", (req, res) => {
       res.status(500).json({ error: `could not add user; error: ${err}` });
     });
 });
+
+app.post("/users", async (req, res) => {
+  const { email, password } = req.body;
+
+  const data = {
+    email: email,
+    password: password,
+  };
+
+  try {
+    const check = await collection.findOne({ email: email });
+    if (check) {
+      res.json("exist");
+    } else {
+      res.json("notexist");
+      await collection.insertMany([data]);
+    }
+  } catch (e) {
+    res.json("notexist");
+    console.log(e);
+  }
+});
