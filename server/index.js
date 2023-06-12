@@ -11,8 +11,8 @@ app.use(cors());
 app.use(express.json());
 dotenv.config();
 
-// const mongodbUrl = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster1.7ebrdzp.mongodb.net/?retryWrites=true&w=majority`;
-const mongodbUrl = `mongodb://localhost:27017/`;
+const mongodbUrl = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster1.7ebrdzp.mongodb.net/?retryWrites=true&w=majority`;
+// const mongodbUrl = `mongodb://localhost:27017/`;
 
 mongoose.connect(mongodbUrl);
 
