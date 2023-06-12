@@ -4,26 +4,22 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import UserModel from "./models/User.js";
 import bcrypt from "bcrypt";
-import generateLogToken from "./utils.js";
+import generateLogToken from "./utils/tokenGenerator.js";
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 dotenv.config();
 
-const mongodbUrl = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster1.7ebrdzp.mongodb.net/?retryWrites=true&w=majority`;
+// const mongodbUrl = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster1.7ebrdzp.mongodb.net/?retryWrites=true&w=majority`;
+const mongodbUrl = `mongodb://localhost:27017/`;
 
 mongoose.connect(mongodbUrl);
 
 app.get("/users", (req, res) => {
-  const userId = req.session.id;
-  UserModel.findById(userId)
-    .then((user) => {
-      if (user) {
-        res.json(user);
-      } else {
-        res.status(404).json({ error: "User not found" });
-      }
+  UserModel.find()
+    .then((users) => {
+      res.json(users);
     })
     .catch((err) => {
       res.status(500).json({ error: "Internal server error" });
@@ -32,30 +28,33 @@ app.get("/users", (req, res) => {
 
 app.post("/login", (req, res) => {
   const { email, password } = req.body;
-  UserModel.findOne({ email: email }).then((user) => {
-    if (user) {
-      bcrypt.compare(password, user.password, (err, isMatch) => {
-        if (err) {
-          console.log(err);
-          return res.status(500).json({ error: "Internal Server Error" });
-        }
-        if (isMatch) {
-          res.json({ message: "Correct data" }),
+
+  console.log("pass:", password);
+  UserModel.findOne({ email: email })
+    .select("+password")
+    .then((user) => {
+      if (user) {
+        bcrypt.compare(password, user.password, (err, isMatch) => {
+          if (err) {
+            console.log(err);
+            return res.status(500).json({ error: "Internal Server Error" });
+          }
+          if (isMatch) {
+            const token = generateLogToken(user);
             res.send({
               _id: user._id,
               name: user.name,
               email: user.email,
-              password: user.password,
-              token: generateLogToken(user),
+              token: token,
             });
-        } else {
-          res.json("Invalid email or password");
-        }
-      });
-    } else {
-      res.json("No account registered with this email");
-    }
-  });
+          } else {
+            res.json("Invalid email or password");
+          }
+        });
+      } else {
+        res.json("No account registered with this email");
+      }
+    });
 });
 
 app.post("/register", (req, res) => {
