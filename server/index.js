@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import UserModel from "./models/User.js";
 import bcrypt from "bcrypt";
-import { generateLogToken } from "./utils.js";
+import generateLogToken from "./utils.js";
 
 const app = express();
 app.use(cors());
@@ -40,7 +40,7 @@ app.post("/login", (req, res) => {
           return res.status(500).json({ error: "Internal Server Error" });
         }
         if (isMatch) {
-          res.json({ message: "Correct data", name: user.name }),
+          res.json({ message: "Correct data" }),
             res.send({
               _id: user._id,
               name: user.name,
