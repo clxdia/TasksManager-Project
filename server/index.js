@@ -1,105 +1,73 @@
 import express from "express";
-import { connectToDb, getDatabase } from "./mongodb/database.js";
 import cors from "cors";
-import { Db } from "mongodb";
+import mongoose from "mongoose";
+import dotenv from "dotenv";
+import UserModel from "./models/User.js";
+import bcrypt from "bcrypt";
+import { generateLogToken } from "./utils.js";
 
 const app = express();
-
 app.use(cors());
 app.use(express.json());
+dotenv.config();
 
-let database;
+const mongodbUrl = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster1.7ebrdzp.mongodb.net/?retryWrites=true&w=majority`;
 
-connectToDb((err) => {
-  if (!err) {
-    app.listen(3005, () => {
-      console.log("app listening on port 3005");
-    });
-    database = getDatabase();
-  }
-});
+mongoose.connect(mongodbUrl);
 
 app.get("/users", (req, res) => {
-  let users = [];
-  database
-    .collection("users")
-    .find()
-    .sort({ title: 1 })
-    .forEach((user) => users.push(user))
-    .then(() => {
-      res.status(200).json(users);
-    })
-    .catch(() => {
-      res.status(500).json({ error: "could not fetch users" });
-    });
-});
-
-app.get("/tasks", (req, res) => {
-  let tasks = [];
-  database
-    .collection("tasks")
-    .find()
-    .sort({ title: 1 })
-    .forEach((task) => tasks.push(task))
-    .then(() => {
-      res.status(200).json(tasks);
-    })
-    .catch(() => {
-      res.status(500).json({ error: "could not fetch tasks" });
-    });
-});
-
-app.post("/users", (req, res) => {
-  let user = req.body;
-  database
-    .collection("users")
-    .insertOne(user)
-    .then((result) => {
-      res.status(201).json(result);
+  const userId = req.session.id;
+  UserModel.findById(userId)
+    .then((user) => {
+      if (user) {
+        res.json(user);
+      } else {
+        res.status(404).json({ error: "User not found" });
+      }
     })
     .catch((err) => {
-      res.status(500).json({ error: `could not add user; error: ${err}` });
+      res.status(500).json({ error: "Internal server error" });
     });
 });
 
-app.post("/users", async (req, res) => {
+app.post("/login", (req, res) => {
   const { email, password } = req.body;
-
-  try {
-    const user = await collection.findOne({ email });
-
+  UserModel.findOne({ email: email }).then((user) => {
     if (user) {
-      // User with the same email already exists
-      res.json("exist");
+      bcrypt.compare(password, user.password, (err, isMatch) => {
+        if (err) {
+          console.log(err);
+          return res.status(500).json({ error: "Internal Server Error" });
+        }
+        if (isMatch) {
+          res.json({ message: "Correct data", name: user.name }),
+            res.send({
+              _id: user._id,
+              name: user.name,
+              email: user.email,
+              password: user.password,
+              token: generateLogToken(user),
+            });
+        } else {
+          res.json("Invalid email or password");
+        }
+      });
     } else {
-      // Insert a new user into the "users" collection
-      await collection.insertOne({ email, password });
-      res.json("success");
+      res.json("No account registered with this email");
     }
-  } catch (e) {
-    res.status(500).json("error"); // Error occurred
-    console.log(e);
-  }
+  });
 });
 
-app.post("/login", async (req, res) => {
-  const { email, password } = req.body;
+app.post("/register", (req, res) => {
+  const { name, email, password } = req.body;
 
-  try {
-    const user = await collection.findOne({ email });
+  bcrypt.hash(password, 10).then((hashedPassword) => {
+    UserModel.create({ name, email, password: hashedPassword })
+      .then((users) => res.json(users))
+      .catch((err) => res.json(err));
+  });
+});
 
-    if (user) {
-      // Check if the password matches
-      if (user.password === password) {
-        res.json("success"); // Successful login
-      } else {
-        res.json("invalid"); // Invalid password
-      }
-    } else {
-      res.json("invalid"); // User not found
-    }
-  } catch (e) {
-    res.status(500).json("error"); // Error occurred
-    console.log(e);
-  }
+app.listen(3005, () => {
+  console.log("app listening on port 3005");
 });
