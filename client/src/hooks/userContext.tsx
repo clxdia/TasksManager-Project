@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 
 interface UserContextProps {
   user: {
@@ -22,16 +22,19 @@ interface UserProviderProps {
 }
 
 const UserProvider = ({ children }: UserProviderProps) => {
-  const userDataFromCookie = document.cookie
-    .split(";")
-    .find((cookie) => cookie.trim().startsWith("user="));
+  const [user, setUser] = useState<any>(null);
 
-  const [user, setUser] = useState<any>(() => {
+  useEffect(() => {
+    const userDataFromCookie = document.cookie
+      .split(";")
+      .find((cookie) => cookie.trim().startsWith("user="));
+
     const parsedUserData = userDataFromCookie
       ? JSON.parse(userDataFromCookie.split("=")[1])
       : null;
-    return parsedUserData;
-  });
+
+    setUser(parsedUserData);
+  }, []);
 
   return (
     <UserContext.Provider value={{ user, setUser }}>
