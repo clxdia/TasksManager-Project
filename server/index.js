@@ -5,18 +5,100 @@ import dotenv from "dotenv";
 import UserModel from "./models/User.js";
 import bcrypt from "bcrypt";
 import generateLogToken from "./utils/tokenGenerator.js";
+import cookieParser from "cookie-parser";
+import TaskModel from "./models/Task.js";
+import jwt from "jsonwebtoken";
 
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use(cookieParser());
 dotenv.config();
 
-const mongodbUrl = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster1.7ebrdzp.mongodb.net/?retryWrites=true&w=majority`;
-// const mongodbUrl = `mongodb://localhost:27017/`;
+// const mongodbUrl = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster1.7ebrdzp.mongodb.net/?retryWrites=true&w=majority`;
+const mongodbUrl = `mongodb://localhost:27017/`;
 
 mongoose.connect(mongodbUrl);
 
-app.get("/users", (req, res) => {
+const authenticateToken = (req, res, next) => {
+  const token = req.headers.authorization?.split(" ")[1];
+
+  if (!token) {
+    return res.status(401).json({ error: "Unauthorized: No token provided" });
+  }
+  jwt.verify(token, process.env.JWT_PASS, (err, decodedToken) => {
+    if (err) {
+      console.log(err);
+      return res.status(401).json({ error: "Unauthorized: Invalid token" });
+    }
+    req.user = decodedToken; // Attach the user information to the request object
+    next();
+  });
+};
+
+app.get("/tasks/user", authenticateToken, (req, res) => {
+  const user = req.user;
+  TaskModel.find({ author: user.name })
+    .then((tasks) => {
+      res.status(200).json(tasks);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({ error: "Could not fetch tasks" });
+    });
+});
+
+app.get("/tasks/others", authenticateToken, (req, res) => {
+  const user = req.user;
+  TaskModel.find({ author: { $ne: user.name } })
+    .then((tasks) => {
+      res.status(200).json(tasks);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({ error: "Could not fetch tasks" });
+    });
+});
+
+app.get("/tasks", (req, res) => {
+  TaskModel.find()
+    .then((tasks) => {
+      res.status(200).json(tasks);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({ error: "Could not fetch tasks" });
+    });
+});
+
+app.post("/tasks", (req, res) => {
+  const newTask = new TaskModel({
+    _id: new mongoose.Types.ObjectId(),
+    name: req.body.name,
+    desc: req.body.desc,
+    due_date: req.body.due_date,
+    priority: req.body.priority,
+    tags: req.body.tags,
+    author: req.body.author,
+  });
+  newTask
+    .save()
+    .then((result) => {
+      console.log(result);
+      res.status(201).json({
+        message: "handle POST request to /tasks",
+        createdTask: result,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({
+        error: err,
+      });
+    });
+});
+
+app.get("/users", authenticateToken, (req, res) => {
   UserModel.find()
     .then((users) => {
       res.json(users);
@@ -28,24 +110,23 @@ app.get("/users", (req, res) => {
 
 app.post("/login", (req, res) => {
   const { email, password } = req.body;
-
-  console.log("pass:", password);
   UserModel.findOne({ email: email })
     .select("+password")
     .then((user) => {
       if (user) {
-        bcrypt.compare(password, user.password, (err, isMatch) => {
+        bcrypt.compare(password, user.password, (err, match) => {
           if (err) {
             console.log(err);
             return res.status(500).json({ error: "Internal Server Error" });
           }
-          if (isMatch) {
+          if (match) {
             const token = generateLogToken(user);
             res.send({
               _id: user._id,
               name: user.name,
               email: user.email,
               token: token,
+              message: "Correct data",
             });
           } else {
             res.json("Invalid email or password");
