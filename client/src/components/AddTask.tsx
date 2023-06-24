@@ -1,12 +1,13 @@
 import { UserContext } from "@/hooks/userContext";
 import axios from "axios";
+import Router from "next/router";
 import React, { useContext, useEffect, useState } from "react";
 
 interface Task {
   title: string;
   desc: string;
   due_date: string;
-  priority: string;
+  priority: boolean;
   tags: string;
   author: string;
 }
@@ -19,16 +20,10 @@ const AddTask = () => {
     title: "",
     desc: "",
     due_date: "",
-    priority: "",
+    priority: false,
     tags: "",
-    author: "clxdia",
+    author: "",
   });
-
-  useEffect(() => {
-    const today = new Date();
-    const formattedDate = today.toISOString().split("T")[0];
-    setCurrentDate(formattedDate);
-  }, []);
 
   const handleNewTask = () => {
     setOpen(!open);
@@ -37,22 +32,35 @@ const AddTask = () => {
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    // const { name, value, type, checked } = e.target;
-    // const inputValue = type === "checkbox" ? checked : value;
-    // setTask((prevTask) => ({
-    //   ...prevTask,
-    //   [name]: inputValue,
-    // }));
+    const { name, value, type } = e.target;
+    let inputValue: string | boolean = value;
+
+    if (type === "checkbox") {
+      inputValue = (e.target as HTMLInputElement).checked;
+    }
+
+    setTask((prevTask) => ({
+      ...prevTask,
+      [name]: inputValue,
+    }));
   };
 
-  const handleAddTask = async () => {
-    try {
-      const response = await axios.post("http://localhost:3005/tasks", task);
-      console.log("task added:", task);
-    } catch (error) {
-      console.log("error adding task", error);
-    }
+  const handleAddTask = (e: React.FormEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    axios
+      .post(`http://localhost:3005/tasks`, task)
+      .then((result) => {
+        console.log(result);
+        window.location.reload();
+      })
+      .catch((err) => console.log(err));
   };
+
+  React.useEffect(() => {
+    const today = new Date();
+    const formattedDate = today.toISOString().split("T")[0];
+    setCurrentDate(formattedDate);
+  }, []);
 
   return (
     <div>
@@ -81,14 +89,14 @@ const AddTask = () => {
             value={task.due_date}
             onChange={handleInputChange}
           />
-          <input
+          {/* <input
             type="checkbox"
             id="priority"
             name="priority"
             value={task.priority}
             onChange={handleInputChange}
           />
-          <label htmlFor="priority">Urgent</label>
+          <label htmlFor="priority">Urgent</label> */}
           <input
             type="text"
             name="tags"
@@ -103,7 +111,9 @@ const AddTask = () => {
             value={task.author}
             onChange={handleInputChange}
           />
-          <button onClick={handleAddTask}>Add task</button>
+          <button type="submit" onClick={handleAddTask}>
+            Add task
+          </button>
         </form>
       )}
     </div>

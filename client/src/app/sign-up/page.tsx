@@ -32,7 +32,7 @@ const SignUp = () => {
       .post(`http://localhost:3005/register`, { name, email, password })
       .then((result) => {
         console.log(result);
-        router.push("/login");
+        router.push("/");
       })
       .catch((err) => console.log(err));
   };
