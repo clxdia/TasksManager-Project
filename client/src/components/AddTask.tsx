@@ -2,11 +2,20 @@ import { UserContext } from "@/hooks/userContext";
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 
+interface Task {
+  title: string;
+  desc: string;
+  due_date: string;
+  priority: string;
+  tags: string;
+  author: string;
+}
+
 const AddTask = () => {
   // const { user } = useContext(UserContext);
   const [open, setOpen] = useState<boolean>(false);
   const [currentDate, setCurrentDate] = useState<string>("");
-  const [task, setTask] = useState<object>({
+  const [task, setTask] = useState<Task>({
     title: "",
     desc: "",
     due_date: "",
@@ -25,14 +34,15 @@ const AddTask = () => {
     setOpen(!open);
   };
 
-  const handleInputChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    const inputValue = type === "checkbox" ? checked : value;
-
-    setTask((prevTask) => ({
-      ...prevTask,
-      [name]: inputValue,
-    }));
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    // const { name, value, type, checked } = e.target;
+    // const inputValue = type === "checkbox" ? checked : value;
+    // setTask((prevTask) => ({
+    //   ...prevTask,
+    //   [name]: inputValue,
+    // }));
   };
 
   const handleAddTask = async () => {
