@@ -1,0 +1,36 @@
+.homepage {
+  padding: 30px;
+}
+
+.tasks {
+  display: flex;
+
+  &__user {
+    width: 35%;
+  }
+
+  &__all {
+    width: 70%;
+  }
+}
+
+.tasks_cards {
+  display: flex;
+  gap: 10px;
+}
+
+.tasks_card {
+  border: 1px solid grey;
+  background-color: white;
+
+  border-radius: 10px;
+  padding: 15px;
+  max-width: 250px;
+  min-width: 250px;
+}
+
+.task_ui {
+  background-color: bisque;
+  max-width: 250px;
+  min-width: 250px;
+}
