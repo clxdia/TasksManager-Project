@@ -14,6 +14,11 @@ const Login = () => {
   const [incorrectData, setIncorrectData] = useState<boolean>(false);
   const [noUser, setNoUser] = useState<boolean>(false);
 
+  if (!setUser) {
+    router.push("/");
+    return null;
+  }
+
   const handleSubmit = (e: FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setIncorrectData(false);

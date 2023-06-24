@@ -3,12 +3,16 @@
 import React, { createContext, useState } from "react";
 
 interface UserContextProps {
-  user: any;
+  user: {
+    name: string;
+    email: string;
+    password: string;
+  } | null;
 
-  setUser: React.Dispatch<React.SetStateAction<any>>;
+  setUser: (user: any) => void;
 }
 
-const UserContext = createContext<UserContextProps | null>({
+const UserContext = createContext<UserContextProps>({
   user: null,
   setUser: () => {},
 });
