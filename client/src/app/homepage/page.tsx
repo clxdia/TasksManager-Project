@@ -20,7 +20,7 @@ interface Task {
 }
 
 export default function Homepage(): JSX.Element {
-  const { user } = useContext(UserContext);
+  const { user } = useContext(UserContext) || { user: null };
   const tasks = useFetchData("tasks");
 
   return (

@@ -4,10 +4,14 @@ import React, { createContext, useState } from "react";
 
 interface UserContextProps {
   user: any;
+
   setUser: React.Dispatch<React.SetStateAction<any>>;
 }
 
-const UserContext = createContext<UserContextProps | null>(null);
+const UserContext = createContext<UserContextProps | null>({
+  user: null,
+  setUser: () => {},
+});
 
 interface UserProviderProps {
   children: any;
