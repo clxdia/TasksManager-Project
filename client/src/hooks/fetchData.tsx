@@ -16,6 +16,7 @@ interface Task {
 
 interface FetchDataResponse {
   tasks: Task[];
+  map: any;
 }
 
 const useFetchData = (endpoint: string): FetchDataResponse | null => {
