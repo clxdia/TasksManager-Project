@@ -45,32 +45,37 @@ const Login = () => {
       /(?:(?:^|.*;\s*)token\s*=\s*([^;]*).*$)|^.*$/,
       "$1"
     );
-    if (token) {
-      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-      axios
-        .get("http://localhost:3005/tasks")
-        .then((response) => {
-          const tasks = response.data;
-          axios
-            .get("http://localhost:3005/users", {
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            })
-            .then((response) => {
-              const userData = response.data;
-              setUser(userData[0]);
-              document.cookie = `user=${JSON.stringify(userData[0])}; path=/`;
-            })
-            .catch((error) => {
-              console.log(error);
-            });
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
-  }, []);
+
+    const fetchData = async () => {
+      if (token) {
+        axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+        axios
+          .get("http://localhost:3005/tasks")
+          .then((response) => {
+            const tasks = response.data;
+            axios
+              .get("http://localhost:3005/users", {
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                },
+              })
+              .then((response) => {
+                const userData = response.data;
+                setUser(userData[0]);
+                document.cookie = `user=${JSON.stringify(userData[0])}; path=/`;
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+    };
+
+    fetchData();
+  }, [setUser]);
 
   return (
     <div className="login">
