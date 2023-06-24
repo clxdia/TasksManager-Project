@@ -14,11 +14,6 @@ const Login = () => {
   const [incorrectData, setIncorrectData] = useState<boolean>(false);
   const [noUser, setNoUser] = useState<boolean>(false);
 
-  if (!setUser) {
-    router.push("/");
-    return null;
-  }
-
   const handleSubmit = (e: FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setIncorrectData(false);
@@ -41,12 +36,12 @@ const Login = () => {
   };
 
   useEffect(() => {
-    const token = document.cookie.replace(
-      /(?:(?:^|.*;\s*)token\s*=\s*([^;]*).*$)|^.*$/,
-      "$1"
-    );
-
     const fetchData = async () => {
+      const token = document.cookie.replace(
+        /(?:(?:^|.*;\s*)token\s*=\s*([^;]*).*$)|^.*$/,
+        "$1"
+      );
+
       if (token) {
         try {
           axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
@@ -70,7 +65,7 @@ const Login = () => {
     };
 
     fetchData();
-  }, [setUser]);
+  }, []);
 
   return (
     <div className="login">
