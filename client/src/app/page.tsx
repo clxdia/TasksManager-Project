@@ -48,29 +48,24 @@ const Login = () => {
 
     const fetchData = async () => {
       if (token) {
-        axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-        axios
-          .get("http://localhost:3005/tasks")
-          .then((response) => {
-            const tasks = response.data;
-            axios
-              .get("http://localhost:3005/users", {
-                headers: {
-                  Authorization: `Bearer ${token}`,
-                },
-              })
-              .then((response) => {
-                const userData = response.data;
-                setUser(userData[0]);
-                document.cookie = `user=${JSON.stringify(userData[0])}; path=/`;
-              })
-              .catch((error) => {
-                console.log(error);
-              });
-          })
-          .catch((error) => {
-            console.log(error);
+        try {
+          axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+
+          const tasksResponse = await axios.get("http://localhost:3005/tasks");
+          const tasks = tasksResponse.data;
+
+          const usersResponse = await axios.get("http://localhost:3005/users", {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
           });
+          const userData = usersResponse.data;
+
+          setUser(userData[0]);
+          document.cookie = `user=${JSON.stringify(userData[0])}; path=/`;
+        } catch (error) {
+          console.log(error);
+        }
       }
     };
 
