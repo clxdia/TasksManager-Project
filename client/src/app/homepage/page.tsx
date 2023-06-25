@@ -4,7 +4,8 @@ import UserTasks from "@/components/UserTasks";
 import { UserContext } from "@/hooks/userContext";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import useFetchData from "../../hooks/fetchData";
 
 interface Task {

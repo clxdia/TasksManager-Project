@@ -19,7 +19,10 @@ const Login = () => {
     setIncorrectData(false);
     setNoUser(false);
     axios
-      .post("http://localhost:3005/login", { email, password })
+      .post(
+        "http://localhost:3005/login" || process.env.MONGODB_URL + "/login",
+        { email, password }
+      )
       .then((result) => {
         if (result.data.message === "Correct data") {
           document.cookie = `token=${result.data.token}; path=/`;
@@ -46,14 +49,19 @@ const Login = () => {
         try {
           axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
-          const tasksResponse = await axios.get("http://localhost:3005/tasks");
+          const tasksResponse = await axios.get(
+            "http://localhost:3005/tasks" || process.env.MONGODB_URL + "/tasks"
+          );
           const tasks = tasksResponse.data;
 
-          const usersResponse = await axios.get("http://localhost:3005/users", {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          });
+          const usersResponse = await axios.get(
+            "http://localhost:3005/users" || process.env.MONGODB_URL + "/users",
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
           const userData = usersResponse.data;
 
           setUser(userData[0]);

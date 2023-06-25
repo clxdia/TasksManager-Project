@@ -13,7 +13,7 @@ interface Task {
 }
 
 const AddTask = () => {
-  // const { user } = useContext(UserContext);
+  const { user } = useContext(UserContext);
   const [open, setOpen] = useState<boolean>(false);
   const [currentDate, setCurrentDate] = useState<string>("");
   const [task, setTask] = useState<Task>({
@@ -48,7 +48,10 @@ const AddTask = () => {
   const handleAddTask = (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
     axios
-      .post(`http://localhost:3005/tasks`, task)
+      .post(
+        `http://localhost:3005/tasks` || process.env.MONGODB_URL + "/tasks",
+        task
+      )
       .then((result) => {
         console.log(result);
         window.location.reload();

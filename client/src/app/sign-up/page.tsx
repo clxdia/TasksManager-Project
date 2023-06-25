@@ -5,31 +5,20 @@ import React, { ChangeEvent, FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
-// interface User {
-//   name: string;
-//   email: string;
-//   password: string;
-//   pfp: string;
-// }
-
 const SignUp = () => {
   const router = useRouter();
   const [name, setName] = useState<string>();
   const [email, setEmail] = useState<string>();
   const [password, setPassword] = useState<string>();
 
-  // const handleSubmit = (e: FormEvent<HTMLButtonElement>) => {
-  //   e.preventDefault();
-  //   axios
-  //     .post(`${process.env.MONGODB_URL}/register`, { name, email, password })
-  //     .then((result) => console.log(result))
-  //     .catch((err) => console.log(err));
-  // };
-
   const handleSubmit = (e: FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
     axios
-      .post(`http://localhost:3005/register`, { name, email, password })
+      .post(
+        `http://localhost:3005/register` ||
+          process.env.MONGODB_URL + "/register",
+        { name, email, password }
+      )
       .then((result) => {
         console.log(result);
         router.push("/");
