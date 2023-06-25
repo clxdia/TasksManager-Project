@@ -74,10 +74,10 @@ app.get("/tasks", (req, res) => {
 app.post("/tasks", (req, res) => {
   const newTask = new TaskModel({
     _id: new mongoose.Types.ObjectId(),
-    name: req.body.name,
+    title: req.body.title,
     desc: req.body.desc,
     due_date: req.body.due_date,
-    priority: req.body.priority,
+    // priority: req.body.priority,
     tags: req.body.tags,
     author: req.body.author,
   });
@@ -86,15 +86,20 @@ app.post("/tasks", (req, res) => {
     .then((result) => {
       console.log(result);
       res.status(201).json({
-        message: "handle POST request to /tasks",
+        message: "task created successfully",
         createdTask: result,
       });
     })
     .catch((err) => {
       console.log(err);
-      res.status(500).json({
-        error: err,
-      });
+      if (err.errors) {
+        const errorMessages = Object.values(err.errors).map(
+          (error) => error.message
+        );
+        res.status(400).json({ errors: errorMessages });
+      } else {
+        res.status(500).json({ error: "Internal server error" });
+      }
     });
 });
 
