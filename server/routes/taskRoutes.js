@@ -44,7 +44,7 @@ app.get("/others", authenticateToken, (req, res) => {
 
 app.get("/user/completed", authenticateToken, (req, res) => {
   const user = req.user;
-  TaskModel.find({ author: user.name, completed: { $ne: true } })
+  TaskModel.find({ author: user.name, completed: { $ne: user.true } })
     .then((tasks) => {
       res.status(200).json(tasks);
     })
