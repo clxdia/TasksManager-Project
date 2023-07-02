@@ -7,6 +7,7 @@ import { useContext } from "react";
 import useFetchData from "../hooks/fetchData";
 
 import Task from "@/interfaces/Task";
+import CompletedTasks from "./CompletedTasks";
 
 export default function Homepage(): JSX.Element {
   const { user } = useContext(UserContext) || { user: null };
@@ -62,7 +63,7 @@ export default function Homepage(): JSX.Element {
 
           <div className="tasks__completed tasks__containers">
             <h3>COMPLETED</h3>
-            <UserTasks />
+            <CompletedTasks />
           </div>
         </div>
       </main>

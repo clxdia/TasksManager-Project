@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
 import useFetchData from "@/hooks/fetchData";
-import EditTask from "./EditTask";
 import DeleteTask from "./DeleteTask";
 import Task from "@/interfaces/Task";
-import AddCompleted from "./AddCompleted";
 
-const UserTasks = () => {
-  const tasks = useFetchData("/tasks/user");
+export default function CompletedTasks(): JSX.Element {
+  const tasks = useFetchData("/tasks/user/completed");
 
   return (
     <ul className="tasks__user__cards">
@@ -29,13 +27,10 @@ const UserTasks = () => {
           </div>
           <hr></hr>
           <div className="content__below">
-            <EditTask task={task} />
             <DeleteTask task={task} />
-            <AddCompleted task={task} />
           </div>
         </li>
       ))}
     </ul>
   );
-};
-export default UserTasks;
+}

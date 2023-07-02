@@ -14,6 +14,7 @@ const AddTask = () => {
     due_date: 0,
     tags: [],
     author: "",
+    completed: false,
   });
 
   const handleInputChange = (

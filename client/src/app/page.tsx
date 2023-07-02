@@ -1,5 +1,6 @@
 "use client";
 
+import LoadingHomepage from "@/components/Loading";
 import useFetchData from "@/hooks/fetchData";
 import { UserContext } from "@/hooks/userContext";
 import axios from "axios";
@@ -15,6 +16,7 @@ const Login = () => {
   const [incorrectData, setIncorrectData] = useState<boolean>(false);
   const [noUser, setNoUser] = useState<boolean>(false);
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
 
   const handleSubmit = (e: FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -39,6 +41,7 @@ const Login = () => {
 
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true);
       const token = document.cookie.replace(
         /(?:(?:^|.*;\s*)token\s*=\s*([^;]*).*$)|^.*$/,
         "$1"
@@ -70,6 +73,7 @@ const Login = () => {
           console.log(error);
         }
       }
+      setLoading(false);
     };
 
     fetchData();
@@ -77,7 +81,9 @@ const Login = () => {
 
   return (
     <>
-      {isLoggedIn ? (
+      {loading ? (
+        <LoadingHomepage />
+      ) : isLoggedIn ? (
         <div>
           <Homepage />
         </div>

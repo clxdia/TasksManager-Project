@@ -5,6 +5,7 @@ interface Task {
   due_date: number;
   tags: string[];
   author: string;
+  completed: boolean;
 }
 
 export default Task;
