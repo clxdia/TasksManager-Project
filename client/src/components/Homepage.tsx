@@ -10,7 +10,7 @@ import Task from "@/interfaces/Task";
 
 export default function Homepage(): JSX.Element {
   const { user } = useContext(UserContext) || { user: null };
-  const tasks = useFetchData("tasks/others");
+  const tasks = useFetchData("/tasks/others");
 
   return (
     <div className="homepage">

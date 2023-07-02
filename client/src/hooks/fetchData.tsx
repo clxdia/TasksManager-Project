@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Cookies from "universal-cookie";
-import Task from "@/interfaces/task";
+import Task from "@/interfaces/Task";
 
 interface FetchDataResponse {
   tasks: Task[];
@@ -10,7 +10,7 @@ interface FetchDataResponse {
 
 const useFetchData = (endpoint: string): FetchDataResponse | null => {
   const [data, setData] = useState<FetchDataResponse | null>(null);
-  const baseUrl = "http://localhost:3005/" || process.env.MONGODB_URL;
+  const baseUrl = process.env.MONGODB_URL;
   const cookies = new Cookies();
 
   useEffect(() => {

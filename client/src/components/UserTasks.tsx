@@ -5,7 +5,7 @@ import DeleteTask from "./DeleteTask";
 import Task from "@/interfaces/Task";
 
 const UserTasks = () => {
-  const tasks = useFetchData("tasks/user");
+  const tasks = useFetchData("/tasks/user");
 
   return (
     <ul className="tasks__user__cards">

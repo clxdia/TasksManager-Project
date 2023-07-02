@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import { IoMdAddCircle } from "react-icons/io";
 import { BiLogOutCircle } from "react-icons/bi";
 import { SiTask } from "react-icons/si";
-import pfp from "../../public/pfp.jpg";
 import Image from "next/image";
 import AddTask from "./AddTask";
 import { GrFormClose } from "react-icons/gr";
@@ -31,7 +30,13 @@ function Menu() {
       <div className="menu__wrapper">
         <div className="menu">
           <div>
-            <Image width="45" className="pfp" alt="profile picture" src={pfp} />
+            <Image
+              width="45"
+              className="pfp"
+              alt="profile picture"
+              src="/pfp.jpg"
+              height="45"
+            />
           </div>
           <div>
             <IoMdAddCircle size={40} onClick={handleModal} />

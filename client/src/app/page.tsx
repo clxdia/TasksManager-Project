@@ -4,13 +4,12 @@ import useFetchData from "@/hooks/fetchData";
 import { UserContext } from "@/hooks/userContext";
 import axios from "axios";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+
 import React, { FormEvent, useContext, useEffect, useState } from "react";
 import Homepage from "../components/Homepage";
 
 const Login = () => {
   const { setUser } = useContext(UserContext);
-  const router = useRouter();
   const [name, setName] = useState<string>();
   const [password, setPassword] = useState<string>();
   const [incorrectData, setIncorrectData] = useState<boolean>(false);
@@ -22,10 +21,7 @@ const Login = () => {
     setIncorrectData(false);
     setNoUser(false);
     axios
-      .post(
-        "http://localhost:3005/login" || process.env.MONGODB_URL + "/login",
-        { name, password }
-      )
+      .post(process.env.MONGODB_URL + "/login", { name, password })
       .then((result) => {
         if (result.data.message === "Correct data") {
           document.cookie = `token=${result.data.token}; path=/`;
@@ -53,12 +49,12 @@ const Login = () => {
           axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
           const tasksResponse = await axios.get(
-            "http://localhost:3005/tasks" || process.env.MONGODB_URL + "/tasks"
+            process.env.MONGODB_URL + "/tasks"
           );
           const tasks = tasksResponse.data;
 
           const usersResponse = await axios.get(
-            "http://localhost:3005/users" || process.env.MONGODB_URL + "/users",
+            process.env.MONGODB_URL + "/users",
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -76,7 +72,7 @@ const Login = () => {
       }
     };
 
-    setTimeout(fetchData, 100);
+    fetchData();
   }, []);
 
   return (
