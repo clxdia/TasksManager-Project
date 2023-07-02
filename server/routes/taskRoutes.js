@@ -1,6 +1,8 @@
 import TaskModel from "../models/Task.js";
 import authenticateToken from "../middleware/authenticateToken.js";
 import express from "express";
+import cors from "cors";
+import mongoose from "mongoose";
 const app = express.Router();
 
 // ------------------- GET -----------------------
