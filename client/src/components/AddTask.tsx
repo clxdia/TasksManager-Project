@@ -1,8 +1,8 @@
 import { UserContext } from "@/hooks/userContext";
+import Task from "@/interfaces/Task";
 import axios from "axios";
 import Router from "next/router";
 import React, { useContext, useEffect, useState } from "react";
-import Task from "@/interfaces/task";
 
 const AddTask = () => {
   const { user } = useContext(UserContext);
@@ -20,12 +20,8 @@ const AddTask = () => {
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    const { name, value, type } = e.target;
+    const { name, value } = e.target;
     let inputValue: string | boolean = value;
-
-    if (type === "checkbox") {
-      inputValue = (e.target as HTMLInputElement).checked;
-    }
 
     setTask((prevTask) => ({
       ...prevTask,

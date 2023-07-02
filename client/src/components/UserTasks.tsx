@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import useFetchData from "@/hooks/fetchData";
 import EditTask from "./EditTask";
 import DeleteTask from "./DeleteTask";
-import Task from "@/interfaces/task";
+import Task from "@/interfaces/Task";
 
 const UserTasks = () => {
   const tasks = useFetchData("tasks/user");

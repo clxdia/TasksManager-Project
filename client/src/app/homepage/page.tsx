@@ -4,11 +4,10 @@ import Menu from "@/components/Menu";
 import UserTasks from "@/components/UserTasks";
 import { UserContext } from "@/hooks/userContext";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import useFetchData from "../../hooks/fetchData";
 import pfp from "../../../public/pfp.jpg";
-import Task from "@/interfaces/task";
+import Task from "@/interfaces/Task";
 
 export default function Homepage(): JSX.Element {
   const { user } = useContext(UserContext) || { user: null };
