@@ -2,7 +2,7 @@
 
 import React, { createContext, useEffect, useState } from "react";
 
-interface UserContextProps {
+interface User {
   user: {
     name: string;
     email: string;
@@ -12,7 +12,7 @@ interface UserContextProps {
   setUser: (user: any) => void;
 }
 
-const UserContext = createContext<UserContextProps>({
+const UserContext = createContext<User>({
   user: null,
   setUser: () => {},
 });

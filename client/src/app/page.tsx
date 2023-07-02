@@ -1,5 +1,6 @@
 "use client";
 
+import useFetchData from "@/hooks/fetchData";
 import { UserContext } from "@/hooks/userContext";
 import axios from "axios";
 import Link from "next/link";
@@ -9,7 +10,7 @@ import React, { FormEvent, useContext, useEffect, useState } from "react";
 const Login = () => {
   const { setUser } = useContext(UserContext);
   const router = useRouter();
-  const [email, setEmail] = useState<string>();
+  const [name, setName] = useState<string>();
   const [password, setPassword] = useState<string>();
   const [incorrectData, setIncorrectData] = useState<boolean>(false);
   const [noUser, setNoUser] = useState<boolean>(false);
@@ -21,13 +22,14 @@ const Login = () => {
     axios
       .post(
         "http://localhost:3005/login" || process.env.MONGODB_URL + "/login",
-        { email, password }
+        { name, password }
       )
       .then((result) => {
         if (result.data.message === "Correct data") {
           document.cookie = `token=${result.data.token}; path=/`;
+
           router.push("/homepage");
-        } else if (result.data === "Invalid email or password") {
+        } else if (result.data === "Invalid username or password") {
           setIncorrectData(true);
         } else {
           setNoUser(true);
@@ -72,7 +74,7 @@ const Login = () => {
       }
     };
 
-    fetchData();
+    setTimeout(fetchData, 100);
   }, []);
 
   return (
@@ -85,11 +87,11 @@ const Login = () => {
           tasks.
         </h2>
         <form>
-          <label htmlFor="email">Email</label>
+          <label htmlFor="username">Username</label>
           <input
-            placeholder="Enter your email"
-            type="email"
-            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Enter your username"
+            type="name"
+            onChange={(e) => setName(e.target.value)}
           />
           <label htmlFor="password">Password</label>
           <input
@@ -98,10 +100,12 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
           <button onClick={handleSubmit}>Login</button>
-          {incorrectData && <p>Invalid Email or password. Please try again.</p>}
+          {incorrectData && (
+            <p>Invalid username or password. Please try again.</p>
+          )}
           {noUser && (
             <p>
-              No account registered with this email.{" "}
+              No account registered with this username.{" "}
               <Link href="/sign-up">Please click here to sign up.</Link>
             </p>
           )}

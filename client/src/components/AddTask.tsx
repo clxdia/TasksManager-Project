@@ -2,32 +2,20 @@ import { UserContext } from "@/hooks/userContext";
 import axios from "axios";
 import Router from "next/router";
 import React, { useContext, useEffect, useState } from "react";
-
-interface Task {
-  title: string;
-  desc: string;
-  due_date: string;
-  priority: boolean;
-  tags: string;
-  author: string;
-}
+import Task from "@/interfaces/task";
 
 const AddTask = () => {
   const { user } = useContext(UserContext);
-  const [open, setOpen] = useState<boolean>(false);
+
   const [currentDate, setCurrentDate] = useState<string>("");
   const [task, setTask] = useState<Task>({
+    _id: "",
     title: "",
     desc: "",
-    due_date: "",
-    priority: false,
-    tags: "",
+    due_date: 0,
+    tags: [],
     author: "",
   });
-
-  const handleNewTask = () => {
-    setOpen(!open);
-  };
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -47,10 +35,11 @@ const AddTask = () => {
 
   const handleAddTask = (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
+    const newTask = { ...task, author: user ? user.name : "" };
     axios
       .post(
         `http://localhost:3005/tasks` || process.env.MONGODB_URL + "/tasks",
-        task
+        newTask
       )
       .then((result) => {
         console.log(result);
@@ -66,24 +55,26 @@ const AddTask = () => {
   }, []);
 
   return (
-    <div>
-      <button onClick={handleNewTask}>Add new task!</button>
-      {open && (
-        <form>
-          <input
-            type="text"
-            name="title"
-            placeholder="Title"
-            value={task.title}
-            onChange={handleInputChange}
-          />
-          <textarea
-            maxLength={300}
-            name="desc"
-            placeholder="Describe your task"
-            value={task.desc}
-            onChange={handleInputChange}
-          />
+    <form className="menu__modal__form">
+      <label htmlFor="title">Title</label>
+      <input
+        type="text"
+        name="title"
+        placeholder="Add a title"
+        value={task.title}
+        onChange={handleInputChange}
+      />
+      <label htmlFor="desc">Task details</label>
+      <textarea
+        maxLength={300}
+        name="desc"
+        placeholder="Describe your task"
+        value={task.desc}
+        onChange={handleInputChange}
+      />
+      <div className="date__priority">
+        <div className="date">
+          <label htmlFor="due_date">Due date</label>
           <input
             type="date"
             id="due_date"
@@ -92,34 +83,33 @@ const AddTask = () => {
             value={task.due_date}
             onChange={handleInputChange}
           />
-          {/* <input
-            type="checkbox"
-            id="priority"
-            name="priority"
-            value={task.priority}
-            onChange={handleInputChange}
-          />
-          <label htmlFor="priority">Urgent</label> */}
-          <input
-            type="text"
-            name="tags"
-            placeholder="Tags"
-            value={task.tags}
-            onChange={handleInputChange}
-          />
-          <input
-            type="text"
-            name="author"
-            placeholder="Author"
-            value={task.author}
-            onChange={handleInputChange}
-          />
-          <button type="submit" onClick={handleAddTask}>
-            Add task
-          </button>
-        </form>
-      )}
-    </div>
+        </div>
+      </div>
+      <label htmlFor="tags">Tags</label>
+      <input
+        type="text"
+        name="tags"
+        placeholder="Optional"
+        value={task.tags}
+        onChange={handleInputChange}
+      />
+      <div className="buttons">
+        <button
+          className="buttons__addtask"
+          type="submit"
+          onClick={handleAddTask}
+        >
+          Add Task
+        </button>
+        <button
+          className="buttons__cancel"
+          type="submit"
+          onClick={handleAddTask}
+        >
+          Cancel
+        </button>
+      </div>
+    </form>
   );
 };
 

@@ -1,18 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Cookies from "universal-cookie";
-
-interface Task {
-  id: string;
-  title: string;
-  desc: string;
-  due_date: number;
-  priority: string;
-  tags: string[];
-  name: string;
-  username: string;
-  author: string;
-}
+import Task from "@/interfaces/task";
 
 interface FetchDataResponse {
   tasks: Task[];

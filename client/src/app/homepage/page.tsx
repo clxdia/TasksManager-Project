@@ -1,60 +1,72 @@
 "use client";
 import AddTask from "@/components/AddTask";
+import Menu from "@/components/Menu";
 import UserTasks from "@/components/UserTasks";
 import { UserContext } from "@/hooks/userContext";
-import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import useFetchData from "../../hooks/fetchData";
-
-interface Task {
-  id: string;
-  title: string;
-  desc: string;
-  due_date: number;
-  priority: string;
-  tags: string[];
-  name: string;
-  username: string;
-  author: string;
-}
+import pfp from "../../../public/pfp.jpg";
+import Task from "@/interfaces/task";
 
 export default function Homepage(): JSX.Element {
   const { user } = useContext(UserContext) || { user: null };
-  const tasks = useFetchData("tasks");
+  const tasks = useFetchData("tasks/others");
 
   return (
     <div className="homepage">
-      <h1>Tasks</h1>
-      {user ? <h2>welcome back, {user.name} </h2> : <h2>loading user</h2>}
-      <div className="tasks">
-        <div className="tasks__user">
-          <UserTasks />
-        </div>
+      <Menu />
+      <main className="main">
+        <header>
+          {user ? <h2>Welcome back, {user.name} </h2> : <h2>loading user</h2>}
+          <h1>Today's Tasks</h1>
+        </header>
+        <div className="tasks">
+          <div className="tasks__user tasks__containers">
+            <h3>MINE</h3>
+            <UserTasks />
+          </div>
 
-        <div className="tasks__all">
-          <h2>All Tasks</h2>
-          <ul className="tasks_cards">
-            {tasks?.map((task: Task) => (
-              <li key={task.id} className="tasks_card">
-                <h3>{task.title}</h3>
-                <p>{task.desc}</p>
-                <p>{task.due_date}</p>
-                <p>{task.priority}</p>
-                <ul>
-                  {task.tags.map((tags) => (
-                    <li key={tags}>
-                      <p>#{tags}</p>
-                    </li>
-                  ))}
-                </ul>
-                <p>{task.author}</p>
-              </li>
-            ))}
-          </ul>
+          <div className="tasks__all tasks__containers">
+            <h3>ALL</h3>
+            <ul className="tasks__all__cards">
+              {tasks?.map((task: Task) => (
+                <li key={task._id} className="tasks__ui tasks__ui-all">
+                  <div className="title__icon">
+                    <h4>{task?.title}</h4>{" "}
+                    <div>
+                      <Image
+                        width="35"
+                        className="pfp"
+                        alt="profile picture"
+                        src={pfp}
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <p className="desc">{task?.desc}</p>
+                    <p>{task?.due_date}</p>
+                    <ul className="tags">
+                      {task.tags.map((tag) => (
+                        <li key={tag}>
+                          <p>#{tag}</p>
+                        </li>
+                      ))}
+                    </ul>
+                    <p>{task?.author}</p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="tasks__completed tasks__containers">
+            <h3>COMPLETED</h3>
+            <UserTasks />
+          </div>
         </div>
-      </div>
+      </main>
     </div>
   );
 }

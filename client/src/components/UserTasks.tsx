@@ -1,61 +1,39 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
-import Cookies from "universal-cookie";
-import AddTask from "./AddTask";
-
-interface Task {
-  _id: string;
-  title: string;
-  desc: string;
-  due_date: number;
-  priority: string;
-  tags: string[];
-  name: string;
-  username: string;
-  author: string;
-}
+import useFetchData from "@/hooks/fetchData";
+import EditTask from "./EditTask";
+import DeleteTask from "./DeleteTask";
+import Task from "@/interfaces/task";
 
 const UserTasks = () => {
-  const [tasks, setTasks] = useState<Task[]>([]);
-  const cookies = new Cookies();
-
-  useEffect(() => {
-    const token = cookies.get("token");
-    axios
-      .get("http://localhost:3005/tasks/user", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((response) => {
-        setTasks(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
+  const tasks = useFetchData("tasks/user");
 
   return (
-    <div>
-      <h2>My Tasks</h2>
-      <ul className="task_ui">
-        {tasks.map((task) => (
-          <li key={task?._id} className="tasks_card">
-            <p>{task?.title}</p>
-            <p>{task?.desc}</p>
+    <ul className="tasks__user__cards">
+      {tasks?.map((task: Task) => (
+        <li key={task?._id} className="tasks__ui">
+          <div className="title__icon">
+            <h4>{task?.title}</h4>
+          </div>
+          <div>
+            <p className="desc">{task?.desc}</p>
             <p>{task?.due_date}</p>
-            <p>{task?.priority}</p>
-            <ul>
+
+            <ul className="tags">
               {task.tags.map((tag) => (
-                <li key={tag}>#{tag}</li>
+                <li key={tag}>
+                  <p>#{tag}</p>
+                </li>
               ))}
             </ul>
-            <p>@{task.author}</p>
-          </li>
-        ))}
-      </ul>
-      <AddTask />
-    </div>
+          </div>
+          <hr></hr>
+          <div className="content__below">
+            <EditTask task={task} />
+            <DeleteTask task={task} />
+          </div>
+        </li>
+      ))}
+    </ul>
   );
 };
 export default UserTasks;
