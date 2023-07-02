@@ -61,9 +61,9 @@ app.post("/", (req, res) => {
     title: req.body.title,
     desc: req.body.desc,
     due_date: req.body.due_date,
-
     tags: req.body.tags,
     author: req.body.author,
+    completed: req.body.completed,
   });
   newTask
     .save()
