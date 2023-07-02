@@ -1,7 +1,6 @@
 import { UserContext } from "@/hooks/userContext";
 import Task from "@/interfaces/Task";
 import axios from "axios";
-import Router from "next/router";
 import React, { useContext, useEffect, useState } from "react";
 
 const AddTask = () => {

@@ -3,8 +3,7 @@ import Cookies from "universal-cookie";
 
 import { AiOutlineDelete } from "react-icons/ai";
 import axios from "axios";
-
-import Task from "@/interfaces/task";
+import Task from "@/interfaces/Task";
 
 interface TaskProps {
   task: Task;

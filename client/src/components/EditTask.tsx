@@ -1,8 +1,8 @@
+import Task from "@/interfaces/Task";
 import axios from "axios";
 import React, { useState } from "react";
 import { FiEdit } from "react-icons/fi";
 import Cookies from "universal-cookie";
-import Task from "@/interfaces/task";
 
 interface EditTaskProps {
   task: Task;
