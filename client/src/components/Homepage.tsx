@@ -18,7 +18,7 @@ export default function Homepage(): JSX.Element {
       <main className="main">
         <header>
           {user ? <h2>Welcome back, {user.name} </h2> : <h2>loading user</h2>}
-          <h1>Today's Tasks</h1>
+          <h1>Today&#39;s Tasks</h1>
         </header>
         <div className="tasks">
           <div className="tasks__user tasks__containers">
