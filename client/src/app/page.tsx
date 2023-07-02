@@ -6,6 +6,7 @@ import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { FormEvent, useContext, useEffect, useState } from "react";
+import Homepage from "../components/Homepage";
 
 const Login = () => {
   const { setUser } = useContext(UserContext);
@@ -14,6 +15,7 @@ const Login = () => {
   const [password, setPassword] = useState<string>();
   const [incorrectData, setIncorrectData] = useState<boolean>(false);
   const [noUser, setNoUser] = useState<boolean>(false);
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 
   const handleSubmit = (e: FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -27,8 +29,7 @@ const Login = () => {
       .then((result) => {
         if (result.data.message === "Correct data") {
           document.cookie = `token=${result.data.token}; path=/`;
-
-          router.push("/homepage");
+          setIsLoggedIn(true);
         } else if (result.data === "Invalid username or password") {
           setIncorrectData(true);
         } else {
@@ -68,6 +69,7 @@ const Login = () => {
 
           setUser(userData[0]);
           document.cookie = `user=${JSON.stringify(userData[0])}; path=/`;
+          setIsLoggedIn(true);
         } catch (error) {
           console.log(error);
         }
@@ -78,43 +80,51 @@ const Login = () => {
   }, []);
 
   return (
-    <div className="login">
-      <div className="login__image"></div>
-      <div className="login__form">
-        <h1>Login</h1>
-        <h2>
-          Welcome back! Please log in with your credentials to access your
-          tasks.
-        </h2>
-        <form>
-          <label htmlFor="username">Username</label>
-          <input
-            placeholder="Enter your username"
-            type="name"
-            onChange={(e) => setName(e.target.value)}
-          />
-          <label htmlFor="password">Password</label>
-          <input
-            placeholder="Enter your password"
-            type="password"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <button onClick={handleSubmit}>Login</button>
-          {incorrectData && (
-            <p>Invalid username or password. Please try again.</p>
-          )}
-          {noUser && (
+    <>
+      {isLoggedIn ? (
+        <div>
+          <Homepage />
+        </div>
+      ) : (
+        <div className="login">
+          <div className="login__image"></div>
+          <div className="login__form">
+            <h1>Login</h1>
+            <h2>
+              Welcome back! Please log in with your credentials to access your
+              tasks.
+            </h2>
+            <form>
+              <label htmlFor="username">Username</label>
+              <input
+                placeholder="Enter your username"
+                type="name"
+                onChange={(e) => setName(e.target.value)}
+              />
+              <label htmlFor="password">Password</label>
+              <input
+                placeholder="Enter your password"
+                type="password"
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <button onClick={handleSubmit}>Login</button>
+              {incorrectData && (
+                <p>Invalid username or password. Please try again.</p>
+              )}
+              {noUser && (
+                <p>
+                  No account registered with this username.{" "}
+                  <Link href="/sign-up">Please click here to sign up.</Link>
+                </p>
+              )}
+            </form>
             <p>
-              No account registered with this username.{" "}
-              <Link href="/sign-up">Please click here to sign up.</Link>
+              New user? <Link href="/sign-up">Sign up</Link>
             </p>
-          )}
-        </form>
-        <p>
-          New user? <Link href="/sign-up">Sign up</Link>
-        </p>
-      </div>
-    </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

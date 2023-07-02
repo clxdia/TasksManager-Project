@@ -23,7 +23,7 @@ function Menu() {
   const handleLogout = () => {
     cookies.remove("token");
     cookies.remove("user");
-    router.push("/");
+    window.location.reload();
   };
 
   return (
