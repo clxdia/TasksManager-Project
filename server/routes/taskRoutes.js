@@ -20,7 +20,7 @@ app.get("/", (req, res) => {
 
 app.get("/user", authenticateToken, (req, res) => {
   const user = req.user;
-  TaskModel.find({ author: user.name })
+  TaskModel.find({ author: user.name, completed: { $ne: false } })
     .then((tasks) => {
       res.status(200).json(tasks);
     })
@@ -38,6 +38,17 @@ app.get("/others", authenticateToken, (req, res) => {
     })
     .catch((err) => {
       console.log(err);
+      res.status(500).json({ error: "Could not fetch tasks" });
+    });
+});
+
+app.get("/user/completed", authenticateToken, (req, res) => {
+  const user = req.user;
+  TaskModel.find({ completed: { $ne: true } })
+    .then((tasks) => {
+      res.status(200).json(tasks);
+    })
+    .catch((err) => {
       res.status(500).json({ error: "Could not fetch tasks" });
     });
 });

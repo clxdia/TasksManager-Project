@@ -23,6 +23,9 @@ const TaskSchema = new mongoose.Schema({
   author: {
     type: String,
   },
+  completed: {
+    type: Boolean,
+  },
 });
 
 const TaskModel = mongoose.model("tasks", TaskSchema);
