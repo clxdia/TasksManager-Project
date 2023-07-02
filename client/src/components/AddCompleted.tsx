@@ -15,7 +15,7 @@ const AddCompleted: React.FC<CompletedTaskProp> = ({ task }) => {
     const token = cookies.get("token");
     const completedTask = { ...task, completed: true };
     axios
-      .patch(`http://localhost:3005/tasks/${task?._id}`, completedTask, {
+      .patch(process.env.MONGODB_URL + `/tasks/${task?._id}`, completedTask, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

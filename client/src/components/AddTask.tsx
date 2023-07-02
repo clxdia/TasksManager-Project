@@ -31,12 +31,13 @@ const AddTask = () => {
 
   const handleAddTask = (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    const newTask = { ...task, author: user ? user.name : "" };
+    const newTask = {
+      ...task,
+      author: user ? user.name : "",
+      completed: false,
+    };
     axios
-      .post(
-        `http://localhost:3005/tasks` || process.env.MONGODB_URL + "/tasks",
-        newTask
-      )
+      .post(process.env.MONGODB_URL + "/tasks", newTask)
       .then((result) => {
         console.log(result);
         window.location.reload();
