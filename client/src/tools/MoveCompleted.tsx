@@ -1,6 +1,6 @@
 import Task from "@/interfaces/Task";
 import axios from "axios";
-import React, { useState } from "react";
+import React from "react";
 import Cookies from "universal-cookie";
 import { AiOutlineCheckCircle } from "react-icons/ai";
 
@@ -8,7 +8,7 @@ interface CompletedTaskProp {
   task: Task;
 }
 
-const AddCompleted: React.FC<CompletedTaskProp> = ({ task }) => {
+const MoveCompleted: React.FC<CompletedTaskProp> = ({ task }) => {
   const cookies = new Cookies();
 
   const handleComplete = () => {
@@ -36,4 +36,4 @@ const AddCompleted: React.FC<CompletedTaskProp> = ({ task }) => {
   );
 };
 
-export default AddCompleted;
+export default MoveCompleted;

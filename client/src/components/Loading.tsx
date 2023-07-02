@@ -1,14 +1,7 @@
 "use client";
 import Menu from "@/components/Menu";
-import UserTasks from "@/components/UserTasks";
-import { UserContext } from "@/hooks/userContext";
-import Image from "next/image";
-import { useContext } from "react";
-import useFetchData from "../hooks/fetchData";
 
-import Task from "@/interfaces/Task";
-
-export default function LoadingHomepage(): JSX.Element {
+export default function Loading(): JSX.Element {
   return (
     <div className="homepage">
       <Menu />

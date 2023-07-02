@@ -1,7 +1,7 @@
 import { UserContext } from "@/hooks/userContext";
 import Task from "@/interfaces/Task";
 import axios from "axios";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 
 const AddTask = () => {
   const { user } = useContext(UserContext);

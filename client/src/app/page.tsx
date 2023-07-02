@@ -1,11 +1,9 @@
 "use client";
 
 import LoadingHomepage from "@/components/Loading";
-import useFetchData from "@/hooks/fetchData";
 import { UserContext } from "@/hooks/userContext";
 import axios from "axios";
 import Link from "next/link";
-
 import React, { FormEvent, useContext, useEffect, useState } from "react";
 import Homepage from "../components/Homepage";
 
@@ -115,7 +113,7 @@ const Login = () => {
               )}
               {noUser && (
                 <p>
-                  No account registered with this username.{" "}
+                  No account registered with this username.
                   <Link href="/sign-up">Please click here to sign up.</Link>
                 </p>
               )}

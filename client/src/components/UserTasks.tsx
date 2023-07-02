@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import useFetchData from "@/hooks/fetchData";
-import EditTask from "./EditTask";
-import DeleteTask from "./DeleteTask";
+import EditTask from "../tools/EditTask";
+import DeleteTask from "../tools/DeleteTask";
 import Task from "@/interfaces/Task";
-import AddCompleted from "./AddCompleted";
+import AddCompleted from "../tools/MoveCompleted";
 
 const UserTasks = () => {
   const tasks = useFetchData("/tasks/user");

@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import useFetchData from "@/hooks/fetchData";
-import DeleteTask from "./DeleteTask";
+import DeleteTask from "../tools/DeleteTask";
 import Task from "@/interfaces/Task";
 
 export default function CompletedTasks(): JSX.Element {
