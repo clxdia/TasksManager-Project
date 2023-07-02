@@ -37,6 +37,8 @@ app.post("/login", (req, res) => {
     .select("+password")
     .then((user) => {
       if (user) {
+        console.log("Password:", password);
+        console.log("User Password:", user.password);
         bcrypt.compare(password, user.password, (err, match) => {
           if (err) {
             console.log(err);
