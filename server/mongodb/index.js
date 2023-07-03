@@ -64,7 +64,7 @@ app.post("/login", (req, res) => {
     });
 });
 
-app.post("/register", (req, res) => {
+app.post("/users", (req, res) => {
   const { name, email, password } = req.body;
 
   bcrypt.hash(password, 10).then((hashedPassword) => {
