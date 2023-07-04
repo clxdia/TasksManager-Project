@@ -11,6 +11,19 @@
     margin: auto;
     width: 35%;
 
+    &__buttons {
+      display: flex;
+      justify-content: space-around;
+
+      &--active {
+        color: blue;
+      }
+
+      &--inactive {
+        color: gray;
+      }
+    }
+
     h1 {
       font-size: 30px;
       font-weight: 700;
@@ -55,4 +68,10 @@
       color: aquamarine;
     }
   }
+}
+
+.signup__image {
+  background-color: yellow;
+  height: 100vh;
+  width: 45%;
 }
