@@ -66,6 +66,17 @@ app.post("/login", (req, res) => {
 
 app.post("/users", (req, res) => {
   const { name, email, password } = req.body;
+  UserModel.findOne({ email }).then((existingEmail) => {
+    if (existingEmail) {
+      return res.status(409).json({ message: "Double email" });
+    }
+  });
+
+  UserModel.findOne({ name }).then((existingUsername) => {
+    if (existingUsername) {
+      return res.status(409).json({ message: "Double username" });
+    }
+  });
 
   bcrypt.hash(password, 10).then((hashedPassword) => {
     UserModel.create({ name, email, password: hashedPassword })
