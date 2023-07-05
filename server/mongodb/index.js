@@ -27,7 +27,7 @@ app.get("/users", authenticateToken, (req, res) => {
       res.json(users);
     })
     .catch((err) => {
-      res.status(500).json({ error: "Internal server error" });
+      res.status(500).json({ error: "Internal server error", err });
     });
 });
 
@@ -37,8 +37,6 @@ app.post("/login", (req, res) => {
     .select("+password")
     .then((user) => {
       if (user) {
-        console.log("Password:", password);
-        console.log("User Password:", user.password);
         bcrypt.compare(password, user.password, (err, match) => {
           if (err) {
             console.log(err);
@@ -47,6 +45,8 @@ app.post("/login", (req, res) => {
           if (match) {
             const token = generateLogToken(user);
             res.setHeader("Set-Cookie", `user=${JSON.stringify(user)}; Path=/`);
+            const cookieChangeEvent = new Event("cookiechange");
+            document.dispatchEvent(cookieChangeEvent);
             res.send({
               _id: user._id,
               name: user.name,
