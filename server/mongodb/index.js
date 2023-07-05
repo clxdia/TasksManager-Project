@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import UserModel from "../models/User.js";
 import bcrypt from "bcrypt";
-import generateLogToken from "../utils/tokenGenerator.js";
+import generateLoginToken from "../utils/tokenGenerator.js";
 import cookieParser from "cookie-parser";
 import authenticateToken from "../middleware/authenticateToken.js";
 import taskRoutes from "../routes/taskRoutes.js";
@@ -43,9 +43,8 @@ app.post("/login", (req, res) => {
             return res.status(500).json({ error: "Internal Server Error" });
           }
           if (match) {
-            const token = generateLogToken(user);
-            res.setHeader("Set-Cookie", `user=${JSON.stringify(user)}; Path=/`);
-
+            const token = generateLoginToken(user);
+            res.cookie("user", JSON.stringify(user), { path: "/" });
             res.send({
               _id: user._id,
               name: user.name,
