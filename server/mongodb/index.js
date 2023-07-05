@@ -8,10 +8,12 @@ import generateLogToken from "../utils/tokenGenerator.js";
 import cookieParser from "cookie-parser";
 import authenticateToken from "../middleware/authenticateToken.js";
 import taskRoutes from "../routes/taskRoutes.js";
+import parseUserCookie from "../middleware/parseUserCookie.js";
 
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use(parseUserCookie);
 app.use(cookieParser());
 dotenv.config();
 
@@ -44,9 +46,7 @@ app.post("/login", (req, res) => {
           }
           if (match) {
             const token = generateLogToken(user);
-            res.setHeader("Set-Cookie", `user=${JSON.stringify(user)}; Path=/`);
-            const { setUser } = req.context;
-            setUser(user);
+            res.cookie("user", JSON.stringify(user), { path: "/" });
             res.send({
               _id: user._id,
               name: user.name,
