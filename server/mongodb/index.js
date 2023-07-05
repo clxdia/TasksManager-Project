@@ -44,7 +44,11 @@ app.post("/login", (req, res) => {
           }
           if (match) {
             const token = generateLoginToken(user);
-            res.cookie("user", JSON.stringify(user), { path: "/" });
+            res.cookie("user", JSON.stringify(user), {
+              path: "/",
+              httpOnly: true,
+            });
+
             res.send({
               _id: user._id,
               name: user.name,
