@@ -45,8 +45,8 @@ app.post("/login", (req, res) => {
           if (match) {
             const token = generateLogToken(user);
             res.setHeader("Set-Cookie", `user=${JSON.stringify(user)}; Path=/`);
-            const cookieChangeEvent = new Event("cookiechange");
-            document.dispatchEvent(cookieChangeEvent);
+            const { setUser } = req.context;
+            setUser(user);
             res.send({
               _id: user._id,
               name: user.name,
