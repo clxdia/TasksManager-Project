@@ -1,9 +1,12 @@
+@import "variables";
+
 .login {
   display: flex;
 
   &__image {
-    background-color: cornflowerblue;
+    background-image: url("../assets/backgrounds/2.png");
     height: 100vh;
+    background-size: cover;
     width: 45%;
   }
 
@@ -16,11 +19,14 @@
       justify-content: space-around;
 
       &--active {
-        color: blue;
+        color: black;
+        border-bottom: 3px solid black;
       }
 
       &--inactive {
-        color: gray;
+        color: $dark_grey;
+        border-bottom: 3px solid transparent;
+        cursor: pointer;
       }
     }
 
@@ -30,12 +36,14 @@
     }
 
     h2 {
-      margin-top: 20px;
-      color: gray;
+      margin-top: 50px;
+      color: $dark_grey;
+      font-size: 20px;
+      font-weight: 600;
     }
 
     form {
-      margin-top: 50px;
+      margin-top: 30px;
       display: flex;
       flex-direction: column;
       gap: 10px;
@@ -53,11 +61,14 @@
 
       button {
         margin-top: 10px;
-        background-color: aquamarine;
+        background: linear-gradient(45deg, $green, $red, $blue);
         padding: 20px;
-        border: 1px solid aquamarine;
+        border: 1px solid transparent;
         border-radius: 10px;
         cursor: pointer;
+        color: white;
+        font-size: 15px;
+        font-weight: 600;
       }
     }
   }
@@ -71,7 +82,15 @@
 }
 
 .signup__image {
-  background-color: yellow;
+  background-image: url("../assets/backgrounds/1.png");
+  background-size: cover;
   height: 100vh;
   width: 45%;
+}
+
+.warning {
+  color: $red;
+  font-size: 15px;
+  cursor: pointer;
+  margin-top: 0px !important;
 }

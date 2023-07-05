@@ -40,8 +40,7 @@ const SignUp = ({ toggleLogin }: SignUpProps) => {
     <div className="">
       <h2>
         Welcome! To get started, please create an account by providing your
-        credentials. Once registered, you will be able to access and manage your
-        tasks.
+        credentials.
       </h2>
       <form className="signup__form">
         <label htmlFor="username">Username</label>
@@ -51,7 +50,9 @@ const SignUp = ({ toggleLogin }: SignUpProps) => {
           name="name"
           onChange={(e) => setName(e.target.value)}
         />
-        {doubleUsername && <p>This username is already taken.</p>}
+        {doubleUsername && (
+          <p className="warning">This username is already taken.</p>
+        )}
         <label htmlFor="email">Email</label>
         <input
           type="email"
@@ -60,7 +61,9 @@ const SignUp = ({ toggleLogin }: SignUpProps) => {
           onChange={(e) => setEmail(e.target.value)}
         />
         {doubleEmail && (
-          <p>There&#39;s already an account registered with this email.</p>
+          <p className="warning">
+            There&#39;s already an account registered with this email.
+          </p>
         )}
         <label htmlFor="password">Password</label>
         <input

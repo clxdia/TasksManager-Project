@@ -109,7 +109,10 @@ const Login = ({ setIsLoggedIn }: LoginProps) => {
               )}
             </form>
             <p>
-              New user? <button onClick={toggleComponent}>Sign up!</button>
+              New user?{" "}
+              <button className="warning" onClick={toggleComponent}>
+                <u>Sign up!</u>
+              </button>
             </p>
           </>
         )}
