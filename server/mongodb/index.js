@@ -12,7 +12,7 @@ import taskRoutes from "../routes/taskRoutes.js";
 const app = express();
 app.use(cors());
 app.use(express.json());
-app.use(cookieParser);
+app.use(cookieParser());
 dotenv.config();
 
 const mongodbUrl = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster1.7ebrdzp.mongodb.net/?retryWrites=true&w=majority`;
