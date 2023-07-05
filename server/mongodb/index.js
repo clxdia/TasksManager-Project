@@ -44,19 +44,23 @@ app.post("/login", (req, res) => {
           }
           if (match) {
             const token = generateLoginToken(user);
-            res.cookie("user", JSON.stringify(user), {
-              path: "/",
-              sameSite: "none",
-            });
-            console.log("User cookie set:", req.cookies.user);
-
-            res.send({
-              _id: user._id,
-              name: user.name,
-              email: user.email,
-              token: token,
-              message: "Correct data",
-            });
+            res
+              .cookie("user", JSON.stringify(user), {
+                path: "/",
+                sameSite: "none",
+              })
+              .send(
+                {
+                  _id: user._id,
+                  name: user.name,
+                  email: user.email,
+                  token: token,
+                  message: "Correct data",
+                },
+                () => {
+                  console.log("User cookie set:", req.cookies.user);
+                }
+              );
           } else {
             res.json("Invalid username or password");
           }
