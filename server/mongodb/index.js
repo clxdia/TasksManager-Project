@@ -46,8 +46,8 @@ app.post("/login", (req, res) => {
             const token = generateLoginToken(user);
             res.cookie("user", JSON.stringify(user), {
               path: "/",
-              httpOnly: true,
             });
+            console.log("User cookie set:", req.cookies.user);
 
             res.send({
               _id: user._id,
