@@ -14,7 +14,8 @@ const DeleteTask: React.FC<TaskProps> = ({ task }) => {
     const token = cookies.get("token");
     alert("are you sure you want to delete this task?");
     axios
-      .delete(process.env.MONGODB_URL + `/tasks/${task?._id}`, {
+      // .delete(process.env.MONGODB_URL + `/tasks/${task?._id}`, {
+      .delete(`http://localhost:3005` + `/tasks/${task?._id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

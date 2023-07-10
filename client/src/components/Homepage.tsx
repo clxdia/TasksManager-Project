@@ -1,26 +1,21 @@
 "use client";
 import Menu from "@/components/Menu";
 import UserTasks from "@/components/UserTasks";
-import { UserContext } from "@/hooks/userContext";
 import Image from "next/image";
-import { useContext } from "react";
 import useFetchData from "../hooks/fetchData";
 
 import Task from "@/interfaces/Task";
 import CompletedTasks from "./CompletedTasks";
+import Welcome from "./Welcome";
 
 export default function Homepage(): JSX.Element {
-  const { user } = useContext(UserContext) || { user: null };
   const tasks = useFetchData("/tasks/others");
 
   return (
     <div className="homepage">
       <Menu />
       <main className="main">
-        <header>
-          {user ? <h2>Welcome back, {user.name} </h2> : <h2>loading user</h2>}
-          <h1>Today&#39;s Tasks</h1>
-        </header>
+        <Welcome />
         <div className="tasks">
           <div className="tasks__user tasks__containers">
             <h3>MINE</h3>

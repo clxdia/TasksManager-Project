@@ -30,7 +30,8 @@ const EditTask: React.FC<EditTaskProps> = ({ task }) => {
     e.preventDefault();
     const token = cookies.get("token");
     axios
-      .patch(process.env.MONGODB_URL + `/tasks/${task?._id}`, updatedTask, {
+      // .patch(process.env.MONGODB_URL + `/tasks/${task?._id}`, updatedTask, {
+      .patch(`http://localhost:3005` + `/tasks/${task?._id}`, updatedTask, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

@@ -1,6 +1,8 @@
 import { Inter } from "next/font/google";
 import { UserProvider } from "@/hooks/userContext";
 import "../sass/global.scss";
+import Welcome from "@/components/Welcome";
+import Menu from "@/components/Menu";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,8 +18,10 @@ export default function RootLayout({
 }) {
   return (
     <UserProvider>
-      <html lang="en">
-        <body className={inter.className}>{children}</body>
+      <html lang="en" className={inter.className}>
+        <body>
+          <main className="main">{children}</main>
+        </body>
       </html>
     </UserProvider>
   );

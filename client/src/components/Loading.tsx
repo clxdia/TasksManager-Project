@@ -4,12 +4,7 @@ import Menu from "@/components/Menu";
 export default function Loading(): JSX.Element {
   return (
     <div className="homepage">
-      <Menu />
       <main className="main">
-        <header>
-          <h2>Loading user</h2>
-          <h1>Loading...</h1>
-        </header>
         <div className="tasks">
           <div className="tasks__user tasks__containers">
             <h3>MINE</h3>

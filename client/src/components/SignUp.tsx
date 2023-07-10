@@ -9,31 +9,62 @@ const SignUp = ({ toggleLogin }: SignUpProps) => {
   const [name, setName] = useState<string>();
   const [email, setEmail] = useState<string>();
   const [password, setPassword] = useState<string>();
+  const [icon, setIcon] = useState<string>();
+
   const [doubleEmail, setDoubleEmail] = useState<boolean>(false);
   const [doubleUsername, setDoubleUsername] = useState<boolean>(false);
+
+  const [nameError, setNameError] = useState<string>("");
+  const [emailError, setEmailError] = useState<string>("");
+  const [passwordError, setPasswordError] = useState<string>("");
 
   const handleSubmit = (e: FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setDoubleEmail(false);
     setDoubleUsername(false);
-    axios
-      .post(process.env.MONGODB_URL + "/users", { name, email, password })
-      .then((result) => {
-        console.log("new user added: ", result);
-        toggleLogin();
-      })
-      .catch((err) => {
-        if (err.response && err.response.status === 409) {
-          const errorMessage = err.response.data.message;
-          if (errorMessage === "Double email") {
-            setDoubleEmail(true);
-          } else if (errorMessage === "Double username") {
-            setDoubleUsername(true);
+    setNameError("");
+    setEmailError("");
+    setPasswordError("");
+
+    if (!name) {
+      setNameError("Username is required");
+    } else if (!/^[^!?."]*$/.test(name)) {
+      setNameError(
+        "Your username contains forbidden characters like '?' or '!'."
+      );
+    }
+    if (!email) {
+      setEmailError("Email is required");
+    }
+    if (!password) {
+      setPasswordError("Password is required");
+    }
+
+    // .post(process.env.MONGODB_URL + "/users", { name, email, password })
+    if (name && email && password) {
+      axios
+        .post(`http://localhost:3005/` + "users", {
+          name,
+          email,
+          password,
+          icon,
+        })
+        .then((result) => {
+          toggleLogin();
+        })
+        .catch((err) => {
+          if (err.response && err.response.status === 409) {
+            const errorMessage = err.response.data.message;
+            if (errorMessage === "Double email") {
+              setDoubleEmail(true);
+            } else if (errorMessage === "Double username") {
+              setDoubleUsername(true);
+            }
+          } else {
+            console.log(err);
           }
-        } else {
-          console.log(err);
-        }
-      });
+        });
+    }
   };
 
   return (
@@ -49,7 +80,9 @@ const SignUp = ({ toggleLogin }: SignUpProps) => {
           placeholder="Choose your username"
           name="name"
           onChange={(e) => setName(e.target.value)}
+          required
         />
+        {nameError && <p className="warning">{nameError}</p>}
         {doubleUsername && (
           <p className="warning">This username is already taken.</p>
         )}
@@ -59,7 +92,9 @@ const SignUp = ({ toggleLogin }: SignUpProps) => {
           placeholder="Enter your email"
           name="email"
           onChange={(e) => setEmail(e.target.value)}
+          required
         />
+        {emailError && <p className="warning">{emailError}</p>}
         {doubleEmail && (
           <p className="warning">
             There&#39;s already an account registered with this email.
@@ -71,17 +106,29 @@ const SignUp = ({ toggleLogin }: SignUpProps) => {
           placeholder="Choose a password"
           name="password"
           onChange={(e) => setPassword(e.target.value)}
+          required
         />
+        {passwordError && <p className="warning">{passwordError}</p>}
         {/* <input
           type="file"
           name="pfp"
           accept="image/*"
           onChange={(e) => setImage(e.target.files?.[0] || null)}
         /> */}
-        <button type="submit" onClick={handleSubmit}>
+        <button
+          type="submit"
+          className="rainbow__button"
+          onClick={handleSubmit}
+        >
           Sign up!
         </button>
       </form>
+      <p>
+        New user?{" "}
+        <button>
+          <u>Sign up!</u>
+        </button>
+      </p>
     </div>
   );
 };

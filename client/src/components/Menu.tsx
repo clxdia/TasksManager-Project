@@ -8,13 +8,28 @@ import Image from "next/image";
 import AddTask from "../tools/AddTask";
 import { GrFormClose } from "react-icons/gr";
 import Cookies from "universal-cookie";
+import { usePathname, useRouter } from "next/navigation";
+import { HiCheckCircle } from "react-icons/hi";
 
 function Menu() {
   const cookies = new Cookies();
-  const [modal, setModal] = useState(false);
+  const [modal, setModal] = useState<boolean>(false);
+  const [settings, setSettings] = useState<boolean>(false);
+  const router = useRouter();
+  const pathname = usePathname();
 
   const handleModal = () => {
     setModal(!modal);
+  };
+
+  const openSettings = () => {
+    router.push("/settings");
+    setSettings(true);
+  };
+
+  const closeSettings = () => {
+    router.back();
+    setSettings(false);
   };
 
   const handleLogout = () => {
@@ -28,16 +43,21 @@ function Menu() {
       <div className="menu__wrapper">
         <div className="menu">
           <div>
-            <Image
-              width="45"
-              className="pfp"
-              alt="profile picture"
-              src="/pfp.jpg"
-              height="45"
-            />
+            {settings ? (
+              <HiCheckCircle size={40} onClick={closeSettings} />
+            ) : (
+              <Image
+                width="45"
+                className="pfp"
+                alt="profile picture"
+                src="/pfp.jpg"
+                height="45"
+                onClick={openSettings}
+              />
+            )}
           </div>
           <div>
-            <IoMdAddCircle size={40} onClick={handleModal} />
+            <IoMdAddCircle size={45} onClick={handleModal} />
           </div>
           <div>
             <SiTask size={40} />

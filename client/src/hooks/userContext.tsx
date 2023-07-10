@@ -36,6 +36,8 @@ const UserProvider = ({ children }: UserProviderProps) => {
     setUser(parsedUserData);
   }, []);
 
+  useEffect(() => {}, [user]);
+
   return (
     <UserContext.Provider value={{ user, setUser }}>
       {children}

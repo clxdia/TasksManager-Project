@@ -12,4 +12,7 @@ module.exports = {
     CLOUDINARY_PRESET_KEY: process.env.CLOUDINARY_PRESET_KEY,
     CLOUDINARY_CLOUD_NAME: process.env.CLOUDINARY_CLOUD_NAME,
   },
+  images: {
+    domains: ["res.cloudinary.com"],
+  },
 };

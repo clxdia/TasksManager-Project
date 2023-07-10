@@ -4,7 +4,19 @@ import axios from "axios";
 import React, { useContext, useState } from "react";
 
 const AddTask = () => {
-  const { user } = useContext(UserContext);
+  // const { user } = useContext(UserContext);
+  const getUsernameFromCookie = () => {
+    const cookies = document.cookie.split("; ");
+    for (let i = 0; i < cookies.length; i++) {
+      const cookie = cookies[i].split("=");
+      if (cookie[0] === "user") {
+        return JSON.parse(decodeURIComponent(cookie[1]));
+      }
+    }
+    return null;
+  };
+
+  const user = getUsernameFromCookie();
 
   const [currentDate, setCurrentDate] = useState<string>("");
   const [task, setTask] = useState<Task>({
@@ -37,7 +49,8 @@ const AddTask = () => {
       completed: false,
     };
     axios
-      .post(process.env.MONGODB_URL + "/tasks", newTask)
+      // .post(process.env.MONGODB_URL + "/tasks", newTask)
+      .post(`http://localhost:3005` + "/tasks", newTask)
       .then((result) => {
         console.log(result);
         window.location.reload();

@@ -9,18 +9,19 @@ import Login from "../components/Login";
 
 const App = () => {
   const { setUser } = useContext(UserContext);
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>();
+  const [loading, setLoading] = useState<boolean>();
 
   useEffect(() => {
     const fetchData = async () => {
-      setLoading(true);
       const token = document.cookie.replace(
         /(?:(?:^|.*;\s*)token\s*=\s*([^;]*).*$)|^.*$/,
         "$1"
       );
 
       if (token) {
+        setLoading(true);
+
         try {
           axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
@@ -38,10 +39,9 @@ const App = () => {
             }
           );
           const userData = usersResponse.data;
-
+          setIsLoggedIn(true);
           setUser(userData[0]);
           document.cookie = `user=${JSON.stringify(userData[0])}; path=/`;
-          setIsLoggedIn(true);
         } catch (error) {
           console.log(error);
         }

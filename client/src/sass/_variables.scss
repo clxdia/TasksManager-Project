@@ -1,7 +1,32 @@
 // ---------- COLORS
-$green: #a5f469;
-$blue: #005ff9;
+$aquamarine: #59f9bf;
+$purple: #c06ce8;
+$green: #d3fe57;
 $black: #171b18;
 $light_grey: #e7e7e9;
 $red: #ee3c2c;
 $dark_grey: #8c9199;
+
+// ----------- TYPOGRAPHY
+
+$luxora: "Luxora Grotesk", sans-serif;
+
+@font-face {
+  font-family: $luxora;
+  src: url("../assets/fonts/LuxoraGrotesk-Bold.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.rainbow__button {
+  margin-top: 10px;
+  background: linear-gradient(45deg, $aquamarine, $purple, $green);
+  padding: 20px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  cursor: pointer;
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  width: 100%;
+}
