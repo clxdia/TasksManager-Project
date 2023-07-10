@@ -1,5 +1,6 @@
 @import "menu";
 @import "task";
+@import "variables";
 
 .homepage {
   padding: 15px;
@@ -12,9 +13,38 @@
 
 .main {
   width: 100%;
+  max-width: 1900px;
+  margin: auto;
 
   header {
     margin-bottom: 20px;
+    display: flex;
+    gap: 20px;
+
+    .header__welcome {
+      width: 55%;
+      padding: 2rem;
+      position: relative;
+      display: flex;
+
+      img {
+        position: absolute;
+        width: 170px;
+        height: auto;
+        right: 50px;
+        bottom: 0;
+      }
+    }
+
+    .card {
+      border: 1px solid black;
+      border-radius: 13px;
+      margin-top: 10px;
+    }
+
+    h1 {
+      font-size: 35px;
+    }
 
     h2 {
       font-size: 15px;
@@ -22,13 +52,85 @@
       padding: 10px 10px 5px 0px;
       color: gray;
     }
+
+    .header__search {
+      width: 45%;
+
+      .tracking-date {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        gap: 10px;
+
+        h3 {
+          font-size: 35px;
+          font-weight: 700;
+        }
+      }
+    }
+
+    .tracking {
+      width: 70%;
+
+      &__progress,
+      &__completed {
+        display: flex;
+        gap: 10px;
+        font-weight: 600;
+        align-items: center;
+
+        h4 {
+          display: flex;
+          flex-direction: column;
+        }
+      }
+
+      &__progress {
+        display: flex;
+        gap: 10px;
+
+        h4 {
+          padding-right: 2vw;
+          border-right: 2px solid black;
+        }
+      }
+
+      &__completed {
+        margin-left: 10px;
+      }
+    }
+
+    .date {
+      flex-flow: 1;
+      font-weight: 600;
+      display: flex;
+      gap: 10px;
+      width: 30%;
+
+      h4 {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+
+    .search,
+    .tracking,
+    .date {
+      padding: 1rem;
+      display: flex;
+      align-items: center;
+    }
+
+    .search {
+      padding: 1rem;
+    }
   }
 }
 
 .tasks {
   display: flex;
   gap: 1vw;
-  width: 95%;
+  width: 100%;
 
   &__containers {
     flex: 1;
@@ -45,7 +147,7 @@
     flex-basis: calc(20% - 10px);
 
     h3 {
-      border-bottom: 3px solid skyblue;
+      border-bottom: 3px solid $green;
     }
 
     &__cards {
@@ -60,7 +162,7 @@
     flex-basis: calc(60% - 20px);
 
     h3 {
-      border-bottom: 3px solid green;
+      border-bottom: 3px solid $purple;
     }
 
     &__cards {
@@ -81,7 +183,7 @@
     flex-basis: calc(20% - 10px);
 
     h3 {
-      border-bottom: 3px solid purple;
+      border-bottom: 3px solid $aquamarine;
     }
   }
 }

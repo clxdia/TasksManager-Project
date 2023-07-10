@@ -9,7 +9,7 @@ import AddTask from "../tools/AddTask";
 import { GrFormClose } from "react-icons/gr";
 import Cookies from "universal-cookie";
 import { usePathname, useRouter } from "next/navigation";
-import { HiCheckCircle } from "react-icons/hi";
+import { HiCheckCircle, HiHome, HiUser } from "react-icons/hi";
 
 function Menu() {
   const cookies = new Cookies();
@@ -57,13 +57,12 @@ function Menu() {
             )}
           </div>
           <div>
-            <IoMdAddCircle size={45} onClick={handleModal} />
+            <HiHome size={30} />
+            <IoMdAddCircle size={30} onClick={handleModal} />
+            <HiUser size={30} />
           </div>
           <div>
-            <SiTask size={40} />
-          </div>
-          <div>
-            <BiLogOutCircle size={45} onClick={handleLogout} />
+            <BiLogOutCircle size={30} onClick={handleLogout} />
           </div>
         </div>
         {modal ? (

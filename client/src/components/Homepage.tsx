@@ -18,7 +18,7 @@ export default function Homepage(): JSX.Element {
         <Welcome />
         <div className="tasks">
           <div className="tasks__user tasks__containers">
-            <h3>MINE</h3>
+            <h3>MY TASKS</h3>
             <UserTasks />
           </div>
 
