@@ -50,7 +50,7 @@ const Login = ({ setIsLoggedIn, toggleLogin }: LoginProps) => {
 
   return (
     <div className="parallax">
-      <section className="login">
+      <section className="login" id="form">
         <div className="login__image"></div>
         <div className="form__container">
           <div className="form">

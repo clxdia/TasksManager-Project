@@ -8,8 +8,6 @@
 
 .intro {
   h1 {
-    font-family: $luxora;
-    font-size: 25px;
     margin-bottom: 1.5rem;
   }
 
@@ -33,10 +31,6 @@
   margin-top: 10rem !important;
   width: 100%;
   margin: auto;
-
-  h1 {
-    font-size: 30px;
-  }
 }
 
 .intro__section {
@@ -85,6 +79,15 @@
       color: white;
     }
   }
+}
+
+.fade-in {
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out;
+}
+
+.fade-in.show {
+  opacity: 1;
 }
 
 footer {

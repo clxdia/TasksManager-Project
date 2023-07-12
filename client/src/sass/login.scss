@@ -15,7 +15,6 @@
     width: 45%;
     min-height: 100vh;
     background-attachment: fixed;
-
     background-repeat: no-repeat;
     background-size: contain;
   }
@@ -72,12 +71,6 @@
       border-bottom: 3px solid transparent;
       cursor: pointer;
     }
-  }
-
-  h1 {
-    font-size: 30px;
-    font-weight: 700;
-    font-family: $luxora;
   }
 
   h2 {

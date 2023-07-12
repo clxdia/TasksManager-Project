@@ -3,7 +3,6 @@
 import React, { useState } from "react";
 import { IoMdAddCircle } from "react-icons/io";
 import { BiLogOutCircle } from "react-icons/bi";
-import { SiTask } from "react-icons/si";
 import Image from "next/image";
 import AddTask from "../tools/AddTask";
 import { GrFormClose } from "react-icons/gr";

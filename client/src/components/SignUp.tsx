@@ -3,9 +3,10 @@ import React, { FormEvent, useState } from "react";
 
 interface SignUpProps {
   toggleLogin: () => void;
+  toggleSignUp: () => void;
 }
 
-const SignUp = ({ toggleLogin }: SignUpProps) => {
+const SignUp = ({ toggleLogin, toggleSignUp }: SignUpProps) => {
   const [name, setName] = useState<string>();
   const [email, setEmail] = useState<string>();
   const [password, setPassword] = useState<string>();
@@ -123,12 +124,12 @@ const SignUp = ({ toggleLogin }: SignUpProps) => {
           Sign up!
         </button>
       </form>
-      <p>
-        New user?{" "}
-        <button>
-          <u>Sign up!</u>
+      {/* <p>
+        Already have an account?{" "}
+        <button onClick={toggleLogin}>
+          <u>Sign in here!</u>
         </button>
-      </p>
+      </p> */}
     </div>
   );
 };
