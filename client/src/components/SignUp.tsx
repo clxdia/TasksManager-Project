@@ -4,9 +4,10 @@ import React, { FormEvent, useState } from "react";
 interface SignUpProps {
   toggleLogin: () => void;
   toggleSignUp: () => void;
+  toggleComponent: () => void;
 }
 
-const SignUp = ({ toggleLogin, toggleSignUp }: SignUpProps) => {
+const SignUp = ({ toggleLogin, toggleComponent }: SignUpProps) => {
   const [name, setName] = useState<string>();
   const [email, setEmail] = useState<string>();
   const [password, setPassword] = useState<string>();
@@ -124,12 +125,12 @@ const SignUp = ({ toggleLogin, toggleSignUp }: SignUpProps) => {
           Sign up!
         </button>
       </form>
-      {/* <p>
+      <p>
         Already have an account?{" "}
         <button onClick={toggleLogin}>
           <u>Sign in here!</u>
         </button>
-      </p> */}
+      </p>
     </div>
   );
 };

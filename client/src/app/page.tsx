@@ -1,15 +1,15 @@
 "use client";
 
+import Form from "@/components/Form";
 import LoadingHomepage from "@/components/Loading";
 import { UserContext } from "@/hooks/userContext";
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import Homepage from "../components/Homepage";
-import Login from "../components/Login";
 
 const App = () => {
   const { setUser } = useContext(UserContext);
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>();
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>();
 
   useEffect(() => {
@@ -50,18 +50,16 @@ const App = () => {
     };
 
     fetchData();
-  }, []);
+  }, [setUser]);
 
   return (
     <>
       {loading ? (
         <LoadingHomepage />
       ) : isLoggedIn ? (
-        <div>
-          <Homepage />
-        </div>
+        <Homepage />
       ) : (
-        <Login
+        <Form
           setIsLoggedIn={setIsLoggedIn}
           setLoading={setLoading}
           setUser={setUser}
