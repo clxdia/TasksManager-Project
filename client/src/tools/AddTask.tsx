@@ -1,24 +1,13 @@
-import { UserContext } from "@/hooks/userContext";
+import getUsernameFromCookie from "@/hooks/getUserCookie";
 import Task from "@/interfaces/Task";
 import axios from "axios";
-import React, { useContext, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const AddTask = () => {
-  // const { user } = useContext(UserContext);
-  const getUsernameFromCookie = () => {
-    const cookies = document.cookie.split("; ");
-    for (let i = 0; i < cookies.length; i++) {
-      const cookie = cookies[i].split("=");
-      if (cookie[0] === "user") {
-        return JSON.parse(decodeURIComponent(cookie[1]));
-      }
-    }
-    return null;
-  };
-
   const user = getUsernameFromCookie();
 
   const [currentDate, setCurrentDate] = useState<string>("");
+  const [tag, setTag] = useState<string>("");
   const [task, setTask] = useState<Task>({
     _id: "",
     title: "",
@@ -33,18 +22,22 @@ const AddTask = () => {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
-    let inputValue: string | boolean = value;
-
-    setTask((prevTask) => ({
-      ...prevTask,
-      [name]: inputValue,
-    }));
+    if (name === "tags") {
+      setTag(value);
+    } else {
+      let inputValue: string | boolean = value;
+      setTask((prevTask) => ({
+        ...prevTask,
+        [name]: inputValue,
+      }));
+    }
   };
 
   const handleAddTask = (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const newTask = {
       ...task,
+      tags: tag.split(" "),
       author: user ? user.name : "",
       completed: false,
     };
@@ -58,7 +51,7 @@ const AddTask = () => {
       .catch((err) => console.log(err));
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     const today = new Date();
     const formattedDate = today.toISOString().split("T")[0];
     setCurrentDate(formattedDate);
@@ -100,7 +93,7 @@ const AddTask = () => {
         type="text"
         name="tags"
         placeholder="Optional"
-        value={task.tags}
+        value={tag}
         onChange={handleInputChange}
       />
       <div className="buttons">

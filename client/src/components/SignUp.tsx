@@ -27,6 +27,7 @@ const SignUp = ({ toggleLogin, toggleComponent }: SignUpProps) => {
     setNameError("");
     setEmailError("");
     setPasswordError("");
+    setIcon("icon1");
 
     if (!name) {
       setNameError("Username is required");

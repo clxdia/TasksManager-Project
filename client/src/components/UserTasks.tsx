@@ -5,12 +5,14 @@ import DeleteTask from "../tools/DeleteTask";
 import Task from "@/interfaces/Task";
 import AddCompleted from "../tools/MoveCompleted";
 
-const UserTasks = () => {
-  const tasks = useFetchData("/tasks/user");
+interface Props {
+  myTasks: any;
+}
 
+const UserTasks = ({ myTasks }: Props) => {
   return (
     <ul className="tasks__user__cards">
-      {tasks?.map((task: Task) => (
+      {myTasks?.map((task: Task) => (
         <li key={task?._id} className="tasks__ui">
           <div className="title__icon">
             <h4>{task?.title}</h4>
@@ -18,10 +20,9 @@ const UserTasks = () => {
           <div>
             <p className="desc">{task?.desc}</p>
             <p>{task?.due_date}</p>
-
             <ul className="tags">
               {task.tags.map((tag) => (
-                <li key={tag}>
+                <li className="tags__user" key={tag}>
                   <p>#{tag}</p>
                 </li>
               ))}

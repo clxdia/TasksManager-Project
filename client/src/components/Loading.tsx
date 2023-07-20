@@ -4,6 +4,7 @@ import Menu from "@/components/Menu";
 export default function Loading(): JSX.Element {
   return (
     <div className="homepage">
+      {/* <Menu setSettings={setSettings} /> */}
       <main className="main">
         <div className="tasks">
           <div className="tasks__user tasks__containers">

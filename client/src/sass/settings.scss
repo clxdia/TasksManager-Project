@@ -1,0 +1,134 @@
+.settings {
+  display: flex;
+  gap: 3rem;
+  height: 97vh;
+
+  h2 {
+    text-align: right;
+  }
+
+  &__links {
+    padding-top: 10px;
+  }
+
+  aside {
+    border-right: 1px solid black;
+    width: 25%;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-left: 15px;
+
+    h3 {
+      padding-top: 25px;
+      padding-bottom: 25px;
+      font-weight: 500;
+      font-size: 19px;
+      font-family: $luxora;
+      cursor: pointer;
+
+      &:hover {
+        animation: bounce 1s infinite;
+      }
+    }
+  }
+
+  main {
+    width: 75%;
+    height: 97vh;
+  }
+
+  hr {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .header__welcome {
+    width: 90% !important;
+    flex-direction: row-reverse;
+
+    img {
+      left: 3rem !important;
+      transform: scaleX(-1);
+    }
+  }
+}
+
+.form-container {
+  height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.form-settings {
+  display: flex;
+  flex-direction: row;
+  gap: 4rem;
+
+  &__left {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    gap: 20px;
+
+    .icon-settings {
+      width: 15rem;
+      height: auto;
+      border-radius: 50%;
+    }
+
+    .rainbow__button {
+      width: 50% !important;
+      display: flex;
+      justify-content: center;
+      position: relative;
+
+      label {
+        color: white;
+        display: flex;
+        margin: auto;
+        justify-content: center;
+      }
+
+      .input-settings {
+        position: absolute;
+        opacity: 0;
+        width: 100%;
+        height: 100%;
+        cursor: pointer !important;
+      }
+    }
+  }
+
+  &__right {
+    flex-direction: column;
+    display: flex;
+    width: 45%;
+  }
+
+  .buttons {
+    margin-top: 20px;
+  }
+}
+
+.delete-account {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+@keyframes bounce {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-10px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}

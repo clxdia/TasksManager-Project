@@ -64,14 +64,16 @@ const Login = ({ setIsLoggedIn, toggleLogin }: LoginProps) => {
           Login
         </button>
         {incorrectData && (
-          <p>Invalid username or password. Please try again.</p>
+          <p className="warning">
+            Invalid username or password. Please try again.
+          </p>
         )}
         {noUser && (
-          <p>
+          <p className="warning">
             No account registered with this username.
-            <button onClick={() => setActiveComponent("signup")}>
+            {/* <button onClick={() => setActiveComponent("signup")}>
               Please click here to sign up.
-            </button>
+            </button> */}
           </p>
         )}
       </form>

@@ -1,3 +1,5 @@
+@import "variables";
+
 .tasks__ui {
   font-size: 1vmax;
   background-color: white;
@@ -7,7 +9,7 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-  min-width: 180px;
+  width: 16vw;
   max-width: 320px !important;
 
   position: relative;
@@ -39,9 +41,20 @@
     flex-wrap: wrap;
     gap: 5px;
 
+    &__user {
+      background-color: #d4fe576a;
+    }
+
+    &__completed {
+      background-color: #59f9be52;
+    }
+
+    &__all {
+      background-color: #c16ce84b;
+    }
+
     li {
       padding: 4px 7px 4px 7px;
-      background-color: rgb(235, 235, 235);
       border-radius: 10px;
     }
   }
@@ -54,7 +67,6 @@
 
 .tasks__ui--all {
   @extend .tasks__ui;
-  max-width: 320px !important;
 }
 
 // --------------- LOADING PAGE

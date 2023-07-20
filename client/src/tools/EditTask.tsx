@@ -89,7 +89,10 @@ const EditTask: React.FC<EditTaskProps> = ({ task }) => {
           <button className="buttons__addtask" type="submit">
             Save update
           </button>
-          <button className="buttons__cancel" type="submit">
+          <button
+            className="buttons__cancel"
+            onClick={() => setIsEditing(false)}
+          >
             Cancel
           </button>
         </div>

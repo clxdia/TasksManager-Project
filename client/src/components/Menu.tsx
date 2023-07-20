@@ -8,26 +8,28 @@ import AddTask from "../tools/AddTask";
 import { GrFormClose } from "react-icons/gr";
 import Cookies from "universal-cookie";
 import { usePathname, useRouter } from "next/navigation";
-import { HiCheckCircle, HiHome, HiUser } from "react-icons/hi";
+import { HiHome, HiUser } from "react-icons/hi";
+import getUsernameFromCookie from "@/hooks/getUserCookie";
+import { FaRegCircleUser } from "react-icons/fa6";
 
-function Menu() {
+interface MenuProps {
+  setSettings: (value: boolean) => void;
+}
+
+function Menu({ setSettings }: MenuProps) {
   const cookies = new Cookies();
   const [modal, setModal] = useState<boolean>(false);
-  const [settings, setSettings] = useState<boolean>(false);
-  const router = useRouter();
-  const pathname = usePathname();
+  const user = getUsernameFromCookie();
 
   const handleModal = () => {
     setModal(!modal);
   };
 
-  const openSettings = () => {
-    router.push("/settings");
+  const handleSettings = () => {
     setSettings(true);
   };
 
-  const closeSettings = () => {
-    router.back();
+  const handleHomepage = () => {
     setSettings(false);
   };
 
@@ -42,23 +44,22 @@ function Menu() {
       <div className="menu__wrapper">
         <div className="menu">
           <div>
-            {settings ? (
-              <HiCheckCircle size={40} onClick={closeSettings} />
-            ) : (
+            {user.icon ? (
               <Image
-                width="45"
                 className="pfp"
-                alt="profile picture"
-                src="/pfp.jpg"
-                height="45"
-                onClick={openSettings}
+                src={user.icon}
+                width="400"
+                height="400"
+                alt="icon"
               />
+            ) : (
+              <FaRegCircleUser size={30} />
             )}
           </div>
           <div>
-            <HiHome size={30} />
+            <HiHome size={30} onClick={handleHomepage} />
             <IoMdAddCircle size={30} onClick={handleModal} />
-            <HiUser size={30} />
+            <HiUser size={30} onClick={handleSettings} />
           </div>
           <div>
             <BiLogOutCircle size={30} onClick={handleLogout} />

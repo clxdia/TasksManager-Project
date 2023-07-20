@@ -12,10 +12,6 @@ interface FormProps {
 }
 
 const Form = ({ setIsLoggedIn }: FormProps) => {
-  const [name, setName] = useState<string>();
-  const [password, setPassword] = useState<string>();
-  const [incorrectData, setIncorrectData] = useState<boolean>(false);
-  const [noUser, setNoUser] = useState<boolean>(false);
   const [activeComponent, setActiveComponent] = useState<"login" | "signup">(
     "login"
   );

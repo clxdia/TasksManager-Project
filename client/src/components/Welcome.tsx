@@ -1,23 +1,19 @@
 "use client";
 
+import getUsernameFromCookie from "@/hooks/getUserCookie";
 import Image from "next/image";
 import React from "react";
-import { BiSearchAlt } from "react-icons/bi";
 import friend1 from "../assets/random/friend1.png";
+import Calendar from "./Calendar";
 
-const Welcome = () => {
-  const getUsernameFromCookie = () => {
-    const cookies = document.cookie.split("; ");
-    for (let i = 0; i < cookies.length; i++) {
-      const cookie = cookies[i].split("=");
-      if (cookie[0] === "user") {
-        return JSON.parse(decodeURIComponent(cookie[1]));
-      }
-    }
-    return null;
-  };
+interface Props {
+  completedTasksCount: number;
+  inProgressTasksCount: number;
+}
 
+const Welcome = ({ inProgressTasksCount, completedTasksCount }: Props) => {
   const user = getUsernameFromCookie();
+
   return (
     <header>
       <div className="header__welcome card">
@@ -27,29 +23,21 @@ const Welcome = () => {
         </div>
         <Image src={friend1} width="500" height="500" alt="friend" />
       </div>
-      <div className="header__search">
-        <div className="search card">
-          <BiSearchAlt size={25} />
+      <div className="header__data">
+        <div className="calendar">
+          <Calendar />
         </div>
-        <div className="tracking-date">
-          <div className="tracking card">
-            <div className="tracking__progress">
-              <h3>03</h3>
-              <h4>
-                tasks<span>in progress</span>
-              </h4>
-            </div>
-            <div className="tracking__completed">
-              <h3>12</h3>
-              <h4>
-                tasks<span>completed</span>
-              </h4>
-            </div>
-          </div>
-          <div className="date card">
-            <h3>16</h3>
+        <div className="tracking card">
+          <div className="tracking__progress">
+            <h3>{inProgressTasksCount}</h3>
             <h4>
-              july<span>Monday</span>
+              tasks<span>in progress</span>
+            </h4>
+          </div>
+          <div className="tracking__completed">
+            <h3>{completedTasksCount}</h3>
+            <h4>
+              tasks<span>completed</span>
             </h4>
           </div>
         </div>

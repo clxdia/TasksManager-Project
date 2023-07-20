@@ -2,6 +2,7 @@
 
 import Form from "@/components/Form";
 import LoadingHomepage from "@/components/Loading";
+import getUsernameFromCookie from "@/hooks/getUserCookie";
 import { UserContext } from "@/hooks/userContext";
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
@@ -11,6 +12,7 @@ const App = () => {
   const { setUser } = useContext(UserContext);
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>();
+  const user = getUsernameFromCookie();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -20,18 +22,16 @@ const App = () => {
       );
 
       if (token) {
-        setLoading(true);
-
         try {
           axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
           const tasksResponse = await axios.get(
-            process.env.MONGODB_URL + "/tasks"
+            `http://localhost:3005` + "/tasks"
           );
           const tasks = tasksResponse.data;
 
           const usersResponse = await axios.get(
-            process.env.MONGODB_URL + "/users",
+            `http://localhost:3005` + "/users/" + `${user._id}`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -39,9 +39,13 @@ const App = () => {
             }
           );
           const userData = usersResponse.data;
-          setIsLoggedIn(true);
-          setUser(userData[0]);
-          document.cookie = `user=${JSON.stringify(userData[0])}; path=/`;
+
+          if (userData) {
+            setIsLoggedIn(true);
+            document.cookie = `user=${JSON.stringify(userData)}; path=/`;
+          } else {
+            setIncorrectData(true);
+          }
         } catch (error) {
           console.log(error);
         }
@@ -70,3 +74,6 @@ const App = () => {
 };
 
 export default App;
+function setIncorrectData(arg0: boolean) {
+  throw new Error("Function not implemented.");
+}

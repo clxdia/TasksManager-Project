@@ -6,6 +6,7 @@ import Task from "@/interfaces/Task";
 interface FetchDataResponse {
   tasks: Task[];
   map: any;
+  length: any;
 }
 
 const useFetchData = (endpoint: string): FetchDataResponse | null => {

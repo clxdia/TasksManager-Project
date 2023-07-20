@@ -4,6 +4,7 @@
 @import "variables";
 @import "intro";
 @import "mediaqueries";
+@import "settings";
 
 html,
 body {
@@ -23,4 +24,8 @@ h1 {
 h2 {
   color: $dark-grey;
   font-weight: 500;
+}
+
+svg {
+  cursor: pointer;
 }
