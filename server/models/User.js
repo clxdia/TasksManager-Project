@@ -27,7 +27,6 @@ const UserSchema = new mongoose.Schema({
   },
   icon: {
     type: String,
-    required: [false],
   },
 });
 

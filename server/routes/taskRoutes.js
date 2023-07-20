@@ -127,7 +127,7 @@ app.delete("/:id", authenticateToken, (req, res) => {
     })
     .catch((err) => {
       console.error(err);
-      res.status(500).json({ error: "Could not update task" });
+      res.status(500).json({ error: "Could not delete task" });
     });
 });
 
