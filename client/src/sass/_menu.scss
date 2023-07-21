@@ -3,7 +3,7 @@
   min-width: 60px;
   height: 97vh;
   position: static;
-  background-color: white;
+
   z-index: 2;
 
   .menu {
@@ -28,112 +28,6 @@
       height: auto;
       border-radius: 100%;
       margin-top: 7px;
-    }
-  }
-}
-
-.menu__modal {
-  position: absolute;
-  left: 0;
-  top: 0;
-  z-index: -1;
-  background-color: rgba(0, 0, 0, 0.5);
-  justify-content: center;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 100%;
-  align-items: center;
-
-  &__ui {
-    background-color: white;
-    padding: 5%;
-    position: relative;
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.13);
-    border-radius: 10px;
-    width: 25%;
-    min-width: 250px;
-    max-width: 350px;
-
-    .closebutton {
-      padding: 6px 6px 1px 6px;
-      border-radius: 50px;
-      background-color: rgba(0, 0, 0, 0.094);
-      width: fit-content;
-      position: absolute;
-      top: 20px;
-      right: 20px;
-    }
-
-    h2 {
-      margin-bottom: 3px;
-    }
-
-    h3 {
-      margin-bottom: 30px;
-    }
-  }
-
-  &__form {
-    display: flex;
-    flex-direction: column;
-
-    input,
-    textarea {
-      border: 1px solid gray;
-      padding: 12px;
-      border-radius: 5px;
-
-      &[type="date"] {
-        padding: 7px;
-      }
-
-      &[type="checkbox"] {
-        width: 20px;
-        height: 20px;
-      }
-    }
-
-    .date__priority {
-      display: flex;
-      align-items: center;
-
-      align-items: center;
-      justify-content: space-between;
-
-      div {
-        display: flex;
-        flex-direction: column;
-      }
-    }
-
-    .buttons {
-      display: flex;
-      width: 100%;
-      justify-content: space-between;
-      margin-top: 20px;
-
-      button {
-        width: 48%;
-        padding: 10px;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: transform 300ms;
-
-        &:hover {
-          transform: translateY(-4px);
-          transition: transform 300ms;
-        }
-      }
-
-      &__addtask {
-        color: white;
-        background: linear-gradient(110deg, blue, purple);
-      }
-
-      &__cancel {
-        border: 1px solid gray;
-      }
     }
   }
 }
@@ -215,4 +109,8 @@ label {
   border: solid white;
   border-width: 0 0.15em 0.15em 0;
   transform: rotate(45deg);
+}
+
+.mobile__menu {
+  display: none;
 }

@@ -16,7 +16,7 @@ export default function CompletedTasks({ completedTasks }: Props): JSX.Element {
           </div>
           <div>
             <p className="desc">{task?.desc}</p>
-            <p>{task?.due_date}</p>
+            <p className="date">{task?.due_date}</p>
 
             <ul className="tags">
               {task.tags.map((tag) => (
@@ -27,7 +27,7 @@ export default function CompletedTasks({ completedTasks }: Props): JSX.Element {
             </ul>
           </div>
           <hr></hr>
-          <div className="content__below">
+          <div className="content__below--completed">
             <DeleteTask task={task} />
           </div>
         </li>

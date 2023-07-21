@@ -102,7 +102,7 @@ const EditTask: React.FC<EditTaskProps> = ({ task }) => {
 
   return (
     <div>
-      <FiEdit onClick={handleEdit} />
+      <FiEdit size={16} onClick={handleEdit} />
     </div>
   );
 };

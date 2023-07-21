@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import useFetchData from "@/hooks/fetchData";
+import React from "react";
 import EditTask from "../tools/EditTask";
 import DeleteTask from "../tools/DeleteTask";
 import Task from "@/interfaces/Task";
@@ -19,7 +18,7 @@ const UserTasks = ({ myTasks }: Props) => {
           </div>
           <div>
             <p className="desc">{task?.desc}</p>
-            <p>{task?.due_date}</p>
+            <p className="date">{task?.due_date}</p>
             <ul className="tags">
               {task.tags.map((tag) => (
                 <li className="tags__user" key={tag}>
@@ -30,9 +29,13 @@ const UserTasks = ({ myTasks }: Props) => {
           </div>
           <hr></hr>
           <div className="content__below">
-            <EditTask task={task} />
-            <DeleteTask task={task} />
-            <AddCompleted task={task} />
+            <div>
+              <EditTask task={task} />
+              <DeleteTask task={task} />
+            </div>
+            <div>
+              <AddCompleted task={task} />
+            </div>
           </div>
         </li>
       ))}

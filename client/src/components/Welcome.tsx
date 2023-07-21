@@ -7,8 +7,8 @@ import friend1 from "../assets/random/friend1.png";
 import Calendar from "./Calendar";
 
 interface Props {
-  completedTasksCount: number;
-  inProgressTasksCount: number;
+  completedTasksCount: string;
+  inProgressTasksCount: string;
 }
 
 const Welcome = ({ inProgressTasksCount, completedTasksCount }: Props) => {

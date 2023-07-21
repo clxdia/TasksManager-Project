@@ -7,8 +7,7 @@ import Image from "next/image";
 import AddTask from "../tools/AddTask";
 import { GrFormClose } from "react-icons/gr";
 import Cookies from "universal-cookie";
-import { usePathname, useRouter } from "next/navigation";
-import { HiHome, HiUser } from "react-icons/hi";
+import { HiHome, HiOutlineMenuAlt2, HiUser } from "react-icons/hi";
 import getUsernameFromCookie from "@/hooks/getUserCookie";
 import { FaRegCircleUser } from "react-icons/fa6";
 
@@ -71,14 +70,32 @@ function Menu({ setSettings }: MenuProps) {
               <div className="closebutton">
                 <GrFormClose size={20} onClick={handleModal} />
               </div>
-              <h2>Add task</h2>
-              <h3>Add a new task here!</h3>
-              <AddTask />
+              <h1>Add task</h1>
+              <h2>Add a new task here!</h2>
+              <div className="buttons">
+                <AddTask />
+              </div>
             </div>
           </div>
         ) : (
           <></>
         )}
+      </div>
+      <div className="mobile__menu">
+        <HiOutlineMenuAlt2 />
+        <div className="mobile__menu__pfp">
+          {user.icon ? (
+            <Image
+              className="pfp"
+              src={user.icon}
+              width="400"
+              height="400"
+              alt="icon"
+            />
+          ) : (
+            <FaRegCircleUser size={30} />
+          )}
+        </div>
       </div>
     </>
   );

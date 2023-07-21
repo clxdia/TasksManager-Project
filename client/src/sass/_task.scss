@@ -11,8 +11,20 @@
   gap: 10px;
   width: 16vw;
   max-width: 320px !important;
-
   position: relative;
+
+  hr {
+    width: 100%;
+    border: none;
+    height: 1px;
+    background-color: $light-grey;
+  }
+
+  .author {
+    font-style: oblique !important;
+
+    font-size: 1.4vmin;
+  }
 
   .title__icon {
     display: flex;
@@ -30,16 +42,25 @@
 
   h4 {
     font-weight: 700;
+    font-size: 1.9vmin;
   }
 
   .desc {
     color: rgb(120, 123, 157);
+    font-size: 1.4vmin;
+    margin-bottom: 10px;
+  }
+
+  .date {
+    font-size: 1.4vmin;
   }
 
   .tags {
     display: flex;
     flex-wrap: wrap;
     gap: 5px;
+    font-size: 1.4vmin;
+    margin-top: 15px;
 
     &__user {
       background-color: #d4fe576a;
@@ -61,7 +82,17 @@
 
   .content__below {
     display: flex;
-    gap: 10px;
+    justify-content: space-between;
+
+    div {
+      display: flex;
+      gap: 15px;
+    }
+  }
+
+  .content__below--completed {
+    display: flex;
+    justify-content: end;
   }
 }
 

@@ -1,6 +1,71 @@
 $breakpoint-mobile: 790px;
+$breakpoint-tablet: 1075px;
+
+@media (max-width: $breakpoint-tablet) {
+  h1 {
+    font-size: 20px !important;
+  }
+
+  .header__welcome {
+    h2 {
+      font-size: 13px;
+      width: 100%;
+    }
+  }
+
+  .day {
+    font-size: 40px !important;
+  }
+
+  .calendar-day {
+    font-size: 10px !important;
+    height: 15px !important;
+    width: 15px !important;
+    padding: 2px !important;
+  }
+
+  .calendar-body,
+  .calendar-weekdays {
+    width: 200px !important;
+  }
+
+  .tracking {
+    &__progress,
+    &__completed {
+      gap: 0.5vw !important;
+      justify-content: space-evenly;
+    }
+
+    h3 {
+      font-size: 40px !important;
+    }
+    h4 {
+      font-size: 12px;
+    }
+  }
+}
 
 @media (max-width: $breakpoint-mobile) {
+  .menu__wrapper,
+  .calendar,
+  .tracking {
+    display: none !important;
+  }
+
+  .mobile__menu {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+
+    &__pfp {
+      img {
+        border-radius: 100%;
+        width: 50px;
+        height: 50px;
+      }
+    }
+  }
+
   h1 {
     font-size: 20px !important;
   }

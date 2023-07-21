@@ -38,7 +38,7 @@ const AddTask = () => {
     const newTask = {
       ...task,
       tags: tag.split(" "),
-      author: user ? user.name : "",
+      author: user ? user.name : "unknown",
       completed: false,
     };
     axios
@@ -53,8 +53,14 @@ const AddTask = () => {
 
   useEffect(() => {
     const today = new Date();
-    const formattedDate = today.toISOString().split("T")[0];
-    setCurrentDate(formattedDate);
+    const options = { month: "long", day: "numeric" };
+    const formattedDate = today.toLocaleDateString(undefined, options);
+    const [month, day, year] = formattedDate.split(" ");
+    const monthIndex = new Date(`${month} 1, ${year}`).getMonth() + 1;
+    const formattedDateInYYYYMMDD = `${year}-${monthIndex
+      .toString()
+      .padStart(2, "0")}-${day.padStart(2, "0")}`;
+    setCurrentDate(formattedDateInYYYYMMDD);
   }, []);
 
   return (
@@ -98,18 +104,11 @@ const AddTask = () => {
       />
       <div className="buttons">
         <button
-          className="buttons__addtask"
+          className="rainbow__button addtask"
           type="submit"
           onClick={handleAddTask}
         >
           Add Task
-        </button>
-        <button
-          className="buttons__cancel"
-          type="submit"
-          onClick={handleAddTask}
-        >
-          Cancel
         </button>
       </div>
     </form>

@@ -40,8 +40,13 @@ export default function Homepage(): JSX.Element {
         ) : (
           <>
             <Welcome
-              inProgressTasksCount={inProgressTasksCount}
-              completedTasksCount={completedTasksCount}
+              inProgressTasksCount={inProgressTasksCount.toLocaleString(
+                "en-US",
+                { minimumIntegerDigits: 2 }
+              )}
+              completedTasksCount={completedTasksCount.toLocaleString("en-US", {
+                minimumIntegerDigits: 2,
+              })}
             />
             <div className="tasks">
               <div className="tasks__user tasks__containers">
@@ -59,16 +64,17 @@ export default function Homepage(): JSX.Element {
                       </div>
                       <div>
                         <p className="desc">{task?.desc}</p>
-                        <p>{task?.due_date}</p>
+                        <p className="date">{task?.due_date}</p>
                         <ul className="tags">
-                          {task.tags.map((tag) => (
+                          {task?.tags?.map((tag) => (
                             <li className="tags__all" key={tag}>
                               <p>#{tag}</p>
                             </li>
                           ))}
                         </ul>
-                        <p>{task?.author}</p>
                       </div>
+                      <hr></hr>
+                      <i className="author">by @{task?.author}</i>
                     </li>
                   ))}
                 </ul>
