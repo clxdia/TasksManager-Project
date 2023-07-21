@@ -1,6 +1,4 @@
-import axios from "axios";
-import Link from "next/link";
-import React, { FormEvent, useEffect, useState } from "react";
+import React, { useState } from "react";
 import Intro from "./Intro";
 import Login from "./Login";
 import SignUp from "./SignUp";

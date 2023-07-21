@@ -1,5 +1,3 @@
-"use client";
-
 import getUsernameFromCookie from "@/hooks/getUserCookie";
 import Image from "next/image";
 import React from "react";

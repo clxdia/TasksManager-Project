@@ -19,13 +19,15 @@ const UserTasks = ({ myTasks }: Props) => {
           <div>
             <p className="desc">{task?.desc}</p>
             <p className="date">{task?.due_date}</p>
-            <ul className="tags">
-              {task.tags.map((tag) => (
-                <li className="tags__user" key={tag}>
-                  <p>#{tag}</p>
-                </li>
-              ))}
-            </ul>
+            <div className="tags__wrapper">
+              <ul className="tags">
+                {task.tags.map((tag) => (
+                  <li className="tags__user" key={tag}>
+                    <p>#{tag}</p>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
           <hr></hr>
           <div className="content__below">

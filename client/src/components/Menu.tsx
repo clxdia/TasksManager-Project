@@ -1,5 +1,3 @@
-"use client";
-
 import React, { useState } from "react";
 import { IoMdAddCircle } from "react-icons/io";
 import { BiLogOutCircle } from "react-icons/bi";
@@ -10,6 +8,7 @@ import Cookies from "universal-cookie";
 import { HiHome, HiOutlineMenuAlt2, HiUser } from "react-icons/hi";
 import getUsernameFromCookie from "@/hooks/getUserCookie";
 import { FaRegCircleUser } from "react-icons/fa6";
+import add from "../assets/random/add.png";
 
 interface MenuProps {
   setSettings: (value: boolean) => void;
@@ -82,7 +81,7 @@ function Menu({ setSettings }: MenuProps) {
         )}
       </div>
       <div className="mobile__menu">
-        <HiOutlineMenuAlt2 />
+        <HiOutlineMenuAlt2 size={30} />
         <div className="mobile__menu__pfp">
           {user.icon ? (
             <Image
@@ -95,6 +94,16 @@ function Menu({ setSettings }: MenuProps) {
           ) : (
             <FaRegCircleUser size={30} />
           )}
+        </div>
+        <div className="mobile__menu__add">
+          <Image
+            className="add"
+            src={add}
+            width="400"
+            height="400"
+            alt="icon"
+            onClick={handleModal}
+          />
         </div>
       </div>
     </>

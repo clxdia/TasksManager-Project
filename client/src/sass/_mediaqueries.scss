@@ -48,8 +48,42 @@ $breakpoint-tablet: 1075px;
 @media (max-width: $breakpoint-mobile) {
   .menu__wrapper,
   .calendar,
-  .tracking {
+  .tracking,
+  .header__data {
     display: none !important;
+  }
+
+  .tasks {
+    div {
+      display: none;
+    }
+  }
+
+  .tasks__mobile {
+    display: block;
+  }
+
+  .tasks--mobile {
+    display: block;
+
+    .tasks__toggle {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+
+  .homepage {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .header__welcome {
+    width: 100% !important;
+    flex-basis: auto;
+
+    img {
+      width: 10rem;
+    }
   }
 
   .mobile__menu {
@@ -62,6 +96,92 @@ $breakpoint-tablet: 1075px;
         border-radius: 100%;
         width: 50px;
         height: 50px;
+      }
+    }
+
+    &__add {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 2;
+      border-radius: 100%;
+      background-color: white;
+
+      img {
+        width: 60px;
+        height: 60px;
+      }
+    }
+  }
+
+  .tasks__toggle {
+    h3 {
+      font-family: $luxora;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .mytasks,
+    .tasks--active {
+      border-bottom: 3px solid $green;
+    }
+
+    .completed {
+      border-bottom: 2px solid $aquamarine;
+    }
+  }
+
+  .tasks__all__title {
+    font-family: $luxora;
+    font-weight: 600;
+    font-size: 14px;
+    width: max-content;
+    border-bottom: 3px solid $purple;
+  }
+
+  .tasks__containers {
+    width: 100%;
+    overflow: scroll;
+    height: 40vh;
+
+    .tasks__user__cards,
+    .tasks__all__cards {
+      display: flex;
+      flex-direction: row !important;
+      overflow: scroll;
+      width: max-content;
+      height: 35vh;
+      align-items: center;
+
+      .tasks__ui {
+        padding: 10px;
+        width: 100px;
+        height: max-content;
+
+        h4 {
+          font-size: 12px;
+        }
+
+        svg {
+          font-size: 16px;
+        }
+
+        .desc,
+        .date,
+        .tags {
+          font-size: 10px;
+        }
+
+        .tags__wrapper {
+          width: 100px !important;
+          overflow: scroll;
+
+          .tags {
+            display: flex;
+            overflow: scroll;
+            width: max-content;
+          }
+        }
       }
     }
   }

@@ -1,8 +1,5 @@
 import axios from "axios";
-import Link from "next/link";
-import React, { FormEvent, useEffect, useState } from "react";
-import Intro from "./Intro";
-import SignUp from "./SignUp";
+import React, { FormEvent, useState } from "react";
 
 interface LoginProps {
   setIsLoggedIn: (value: boolean) => void;

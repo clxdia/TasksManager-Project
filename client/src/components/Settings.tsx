@@ -6,7 +6,6 @@ import axios from "axios";
 import Image from "next/image";
 import friend1 from "../assets/random/friend1.png";
 import iconDefault from "../assets/random/user.png";
-import { TiDeleteOutline } from "react-icons/ti";
 import DeleteUser from "@/tools/DeleteUser";
 
 const Settings = () => {

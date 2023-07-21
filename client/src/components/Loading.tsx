@@ -1,6 +1,3 @@
-"use client";
-import Menu from "@/components/Menu";
-
 export default function Loading(): JSX.Element {
   return (
     <div className="homepage">
