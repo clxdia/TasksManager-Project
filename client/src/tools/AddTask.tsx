@@ -53,8 +53,8 @@ const AddTask = () => {
 
   useEffect(() => {
     const today = new Date();
-    // const values = { month: "long", day: "numeric" };
-    const formattedDate = today.toLocaleDateString(undefined);
+    const values = { month: "long", day: "numeric" };
+    const formattedDate = today.toLocaleDateString(undefined, values);
     const [month, day, year] = formattedDate.split(" ");
     const monthIndex = new Date(`${month} 1, ${year}`).getMonth() + 1;
     const formattedDateInYYYYMMDD = `${year}-${monthIndex
