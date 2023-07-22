@@ -63,7 +63,8 @@ const Intro = () => {
                 <h1>Task Completion Tracking</h1>
                 <h2>
                   Stay motivated and celebrate your progress! Pin tasks as
-                  "completed" and keep a visual record of your achievements.
+                  &#34;completed&#34; and keep a visual record of your
+                  achievements.
                 </h2>
               </div>
               <div className="intro__section__image">
@@ -93,8 +94,8 @@ const Intro = () => {
               <h2>
                 Start managing your tasks effectively and bring order to your
                 daily life. Join now by signing up now and unlock the full
-                potential of the task manager website. Together, let's make each
-                day more productive and fulfilling!
+                potential of the task manager website. Together, let&#39;s make
+                each day more productive and fulfilling!
               </h2>
               <button
                 className="intro__button rainbow__button"
