@@ -73,16 +73,19 @@ const Settings = () => {
     const token = cookies.get("token");
 
     try {
-      await axios
-        // .patch(process.env.MONGODB_URL + `/tasks/${task?._id}`, updatedTask, {
-        .patch(`http://localhost:3005` + `/users/${user?._id}`, updatedUser, {
+      await axios.patch(
+        process.env.MONGODB_URL + `/tasks/${user?._id}`,
+        updatedUser,
+        {
+          // .patch(`http://localhost:3005` + `/users/${user?._id}`, updatedUser, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        });
+        }
+      );
 
       const response = await axios.get(
-        `http://localhost:3005/users/${user?._id}`,
+        process.env.MONGODB_URL + `/users/${user?._id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

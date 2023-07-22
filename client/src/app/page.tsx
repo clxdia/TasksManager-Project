@@ -26,12 +26,12 @@ const App = () => {
           axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
           const tasksResponse = await axios.get(
-            `http://localhost:3005` + "/tasks"
+            process.env.MONGODB_URL + "/tasks"
           );
           const tasks = tasksResponse.data;
 
           const usersResponse = await axios.get(
-            `http://localhost:3005` + "/users/" + `${user._id}`,
+            process.env.MONGODB_URL + "/users/" + `${user._id}`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -74,6 +74,7 @@ const App = () => {
 };
 
 export default App;
+
 function setIncorrectData(arg0: boolean) {
   throw new Error("Function not implemented.");
 }

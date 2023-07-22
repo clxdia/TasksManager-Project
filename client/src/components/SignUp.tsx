@@ -46,7 +46,7 @@ const SignUp = ({ toggleLogin, toggleComponent }: SignUpProps) => {
     // .post(process.env.MONGODB_URL + "/users", { name, email, password })
     if (name && email && password) {
       axios
-        .post(`http://localhost:3005/` + "users", {
+        .post(process.env.MONGODB_URL + "users", {
           name,
           email,
           password,

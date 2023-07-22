@@ -15,7 +15,7 @@ const DeleteUser = () => {
     alert("Are you sure you want to delete your account?");
     axios
       // .delete(process.env.MONGODB_URL + `/tasks/${task?._id}`, {
-      .delete(`http://localhost:3005` + `/users/${user?._id}`, {
+      .delete(process.env.MONGODB_URL + `/users/${user?._id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

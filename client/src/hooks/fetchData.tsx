@@ -12,7 +12,7 @@ interface FetchDataResponse {
 const useFetchData = (endpoint: string): FetchDataResponse | null => {
   const [data, setData] = useState<FetchDataResponse | null>(null);
   // const baseUrl = process.env.MONGODB_URL;
-  const baseUrl = `http://localhost:3005`;
+  const baseUrl = process.env.MONGODB_URL;
   const cookies = new Cookies();
 
   useEffect(() => {

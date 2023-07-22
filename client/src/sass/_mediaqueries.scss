@@ -59,6 +59,11 @@ $breakpoint-tablet: 1075px;
     }
   }
 
+  .menu__modal {
+    position: fixed;
+    z-index: 2 !important;
+  }
+
   .tasks__mobile {
     display: block;
   }
@@ -86,10 +91,36 @@ $breakpoint-tablet: 1075px;
     }
   }
 
+  .mobile__menu--toggled {
+    width: 80%;
+    height: 100vh;
+    position: fixed;
+    background-color: $purple;
+    z-index: 3;
+    margin: 0px;
+    padding: 0px;
+    top: 0;
+    left: 0;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+    border: 1px solid black;
+  }
+
   .mobile__menu {
     display: flex;
     width: 100%;
     justify-content: space-between;
+
+    &__above {
+      align-items: flex-end;
+      display: flex;
+      height: 30vh;
+    }
+
+    &__below {
+      background-color: black;
+      height: 70vh;
+    }
 
     &__pfp {
       img {

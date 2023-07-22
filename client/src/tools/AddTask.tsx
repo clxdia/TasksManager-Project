@@ -43,7 +43,7 @@ const AddTask = () => {
     };
     axios
       // .post(process.env.MONGODB_URL + "/tasks", newTask)
-      .post(`http://localhost:3005` + "/tasks", newTask)
+      .post(process.env.MONGODB_URL + "/tasks", newTask)
       .then((result) => {
         console.log(result);
         window.location.reload();
