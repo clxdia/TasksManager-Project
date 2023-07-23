@@ -37,16 +37,23 @@ const EditTask: React.FC<EditTaskProps> = ({ task }) => {
     e.preventDefault();
     const updatedTaskWithTags = {
       ...updatedTask,
-      tags: tag.split(" "),
+      tags: tag
+        .split(/[,\s]+/)
+        .map((t) => t.trim())
+        .filter((t) => t !== ""),
     };
     const token = cookies.get("token");
     axios
       // .patch(process.env.MONGODB_URL + `/tasks/${task?._id}`, updatedTask, {
-      .patch(process.env.MONGODB_URL + `/tasks/${task?._id}`, updatedTask, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
+      .patch(
+        process.env.MONGODB_URL + `/tasks/${task?._id}`,
+        updatedTaskWithTags,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
       .then((res) => {
         console.log("task updated successfully");
         setIsEditing(false);

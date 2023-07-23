@@ -43,7 +43,10 @@ const Settings = () => {
     try {
       const res = await axios.post(
         `https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`,
-        data
+        data,
+        {
+          withCredentials: true,
+        }
       );
       const cloudinaryUrl = res.data.secure_url;
       setPicture(cloudinaryUrl);
@@ -51,7 +54,7 @@ const Settings = () => {
       const updatedUserWithImage = { ...updatedUser, icon: cloudinaryUrl };
       await editUser(updatedUserWithImage);
     } catch (err) {
-      console.log(err);
+      console.log("error uploading icon", err);
     }
   };
 
@@ -65,7 +68,7 @@ const Settings = () => {
       }
       window.location.reload();
     } catch (err) {
-      console.log(err);
+      console.log("error updating icon: ", err);
     }
   };
 

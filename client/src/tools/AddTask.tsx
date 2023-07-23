@@ -37,7 +37,10 @@ const AddTask = () => {
     e.preventDefault();
     const newTask = {
       ...task,
-      tags: tag.split(" "),
+      tags: tag
+        .split(/[,\s]+/)
+        .map((t) => t.trim())
+        .filter((t) => t !== ""),
       author: user ? user.name : "unknown",
       completed: false,
     };
