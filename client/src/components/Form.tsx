@@ -6,7 +6,6 @@ import SignUp from "./SignUp";
 interface FormProps {
   setIsLoggedIn: (value: boolean) => void;
   setLoading: (value: boolean) => void;
-  setUser: (value: boolean) => void;
 }
 
 const Form = ({ setIsLoggedIn }: FormProps) => {

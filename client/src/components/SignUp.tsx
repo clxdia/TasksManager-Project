@@ -43,16 +43,15 @@ const SignUp = ({ toggleLogin, toggleComponent }: SignUpProps) => {
       setPasswordError("Password is required");
     }
 
-    // .post(process.env.MONGODB_URL + "/users", { name, email, password })
     if (name && email && password) {
       axios
-        .post(process.env.MONGODB_URL + "users", {
+        .post(process.env.MONGODB_URL + "/users", {
           name,
           email,
           password,
           icon,
         })
-        .then((result) => {
+        .then((res) => {
           toggleLogin();
         })
         .catch((err) => {
@@ -112,12 +111,7 @@ const SignUp = ({ toggleLogin, toggleComponent }: SignUpProps) => {
           required
         />
         {passwordError && <p className="warning">{passwordError}</p>}
-        {/* <input
-          type="file"
-          name="pfp"
-          accept="image/*"
-          onChange={(e) => setImage(e.target.files?.[0] || null)}
-        /> */}
+
         <button
           type="submit"
           className="rainbow__button"

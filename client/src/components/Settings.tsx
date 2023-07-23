@@ -45,7 +45,7 @@ const Settings = () => {
         `https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`,
         data,
         {
-          withCredentials: true,
+          withCredentials: false,
         }
       );
       const cloudinaryUrl = res.data.secure_url;
