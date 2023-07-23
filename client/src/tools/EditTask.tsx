@@ -12,6 +12,7 @@ const EditTask: React.FC<EditTaskProps> = ({ task }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [updatedTask, setUpdatedTask] = useState<Task>(task);
   const [tag, setTag] = useState<string>("");
+  const [tagsArray, setTagsArray] = useState<string[]>(task.tags || []);
   const cookies = new Cookies();
 
   const handleEdit = () => {
@@ -34,6 +35,10 @@ const EditTask: React.FC<EditTaskProps> = ({ task }) => {
   };
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    const updatedTaskWithTags = {
+      ...updatedTask,
+      tags: tagsArray,
+    };
     const token = cookies.get("token");
     axios
       // .patch(process.env.MONGODB_URL + `/tasks/${task?._id}`, updatedTask, {
