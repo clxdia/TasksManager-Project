@@ -11,6 +11,7 @@ interface EditTaskProps {
 const EditTask: React.FC<EditTaskProps> = ({ task }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [updatedTask, setUpdatedTask] = useState<Task>(task);
+  const [tag, setTag] = useState<string>("");
   const cookies = new Cookies();
 
   const handleEdit = () => {
@@ -21,10 +22,15 @@ const EditTask: React.FC<EditTaskProps> = ({ task }) => {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
-    setUpdatedTask((prevTask) => ({
-      ...prevTask,
-      [name]: value,
-    }));
+    if (name === "tags") {
+      setTag(value);
+    } else {
+      let inputValue: string | boolean = value;
+      setUpdatedTask((prevTask) => ({
+        ...prevTask,
+        [name]: inputValue,
+      }));
+    }
   };
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -82,7 +88,7 @@ const EditTask: React.FC<EditTaskProps> = ({ task }) => {
           type="text"
           name="tags"
           placeholder="Optional"
-          value={updatedTask.tags}
+          value={tag}
           onChange={handleInputChange}
         />
         <div className="buttons">
