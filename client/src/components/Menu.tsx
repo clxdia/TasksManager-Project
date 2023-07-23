@@ -8,6 +8,7 @@ import Cookies from "universal-cookie";
 import { HiHome, HiOutlineMenuAlt2, HiUser } from "react-icons/hi";
 import getUsernameFromCookie from "@/hooks/getUserCookie";
 import { FaRegCircleUser } from "react-icons/fa6";
+import { CgClose } from "react-icons/cg";
 import add from "../assets/random/add.png";
 
 interface MenuProps {
@@ -21,6 +22,7 @@ function Menu({ setSettings }: MenuProps) {
   const [menu, setMenu] = useState<boolean>(false);
 
   const handleModal = () => {
+    setMenu(false);
     setModal(!modal);
   };
 
@@ -89,30 +91,39 @@ function Menu({ setSettings }: MenuProps) {
         <HiOutlineMenuAlt2 size={30} onClick={toggleMenu} />
         {menu ? (
           <div className="mobile__menu--toggled">
-            <div>
-              <GrFormClose size={20} onClick={toggleMenu} />
+            <div className="mobile__menu__purple">
+              <CgClose
+                className="mobile__menu__toggler"
+                size={30}
+                onClick={toggleMenu}
+              />
               <div className="mobile__menu__above">
-                <div className="mobile__menu__pfp">
-                  {user?.icon ? (
-                    <Image
-                      className="pfp"
-                      src={user.icon}
-                      width="400"
-                      height="400"
-                      alt="icon"
-                    />
-                  ) : (
-                    <FaRegCircleUser size={30} />
-                  )}
-                </div>
-                <div>
-                  <h3>{user?.name}</h3>
-                  <h4>{user?.email}</h4>
+                <div className="mobile__menu__content">
+                  <div className="mobile__menu__pfp">
+                    {user?.icon ? (
+                      <Image
+                        className="pfp"
+                        src={user.icon}
+                        width="400"
+                        height="400"
+                        alt="icon"
+                      />
+                    ) : (
+                      <FaRegCircleUser size={30} />
+                    )}
+                  </div>
+                  <div>
+                    <h3>{user?.name}</h3>
+                    <h4>{user?.email}</h4>
+                  </div>
                 </div>
               </div>
               <p>Edit profile info</p>
             </div>
-            <div className="mobile__menu__below"></div>
+            <div className="mobile__menu__below">
+              <IoMdAddCircle size={30} onClick={handleModal} fill="white" />
+              <p>Add new task</p>
+            </div>
           </div>
         ) : (
           <></>
