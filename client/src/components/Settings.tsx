@@ -74,7 +74,7 @@ const Settings = () => {
 
     try {
       await axios.patch(
-        process.env.MONGODB_URL + `/tasks/${user?._id}`,
+        process.env.MONGODB_URL + `/users/${user?._id}`,
         updatedUser,
         {
           // .patch(`http://localhost:3005` + `/users/${user?._id}`, updatedUser, {
