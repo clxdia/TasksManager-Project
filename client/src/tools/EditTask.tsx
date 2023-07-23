@@ -37,7 +37,7 @@ const EditTask: React.FC<EditTaskProps> = ({ task }) => {
     e.preventDefault();
     const updatedTaskWithTags = {
       ...updatedTask,
-      tags: tagsArray,
+      tags: tag.split(" "),
     };
     const token = cookies.get("token");
     axios
