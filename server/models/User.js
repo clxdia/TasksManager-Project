@@ -26,7 +26,7 @@ const UserSchema = new mongoose.Schema({
     select: false,
   },
   icon: {
-    type: String,
+    type: undefined,
   },
 });
 
