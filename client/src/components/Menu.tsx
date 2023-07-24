@@ -28,6 +28,7 @@ function Menu({ setSettings }: MenuProps) {
 
   const handleSettings = () => {
     setSettings(true);
+    setMenu(false);
   };
 
   const handleHomepage = () => {
@@ -97,7 +98,7 @@ function Menu({ setSettings }: MenuProps) {
                 size={30}
                 onClick={toggleMenu}
               />
-              <div className="mobile__menu__above">
+              <div className="mobile__menu__above" onClick={handleSettings}>
                 <div className="mobile__menu__content">
                   <div className="mobile__menu__pfp">
                     {user?.icon ? (
@@ -112,17 +113,26 @@ function Menu({ setSettings }: MenuProps) {
                       <FaRegCircleUser size={30} />
                     )}
                   </div>
-                  <div>
+                  <div className="mobile__menu__text">
                     <h3>{user?.name}</h3>
                     <h4>{user?.email}</h4>
                   </div>
                 </div>
               </div>
-              <p>Edit profile info</p>
+              <p onClick={handleSettings}>Edit profile info</p>
             </div>
             <div className="mobile__menu__below">
-              <IoMdAddCircle size={30} onClick={handleModal} fill="white" />
-              <p>Add new task</p>
+              <div
+                className="mobile__menu__below__content"
+                onClick={handleModal}
+              >
+                <IoMdAddCircle size={30} fill="white" />
+                <p>Add new task</p>
+              </div>
+              <div className="logout" onClick={handleLogout}>
+                <BiLogOutCircle size={30} />
+                <p>Log out</p>
+              </div>
             </div>
           </div>
         ) : (

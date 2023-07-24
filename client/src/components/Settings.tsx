@@ -120,33 +120,36 @@ const Settings = () => {
         </div>
       </aside>
       <main>
-        <div className="header__welcome card ">
+        <header className="header__welcome card ">
           <div>
             {user ? <h1>Hello, {user.name}!</h1> : <h1>Loading user...</h1>}
             <h2>Edit here your profile info</h2>
           </div>
           <Image src={friend1} width="500" height="500" alt="friend" />
-        </div>
+        </header>
         <div className="form-container">
           <form onSubmit={handleSubmit} className="form-settings">
             <div className="form-settings__left">
-              {user.icon ? (
-                <Image
-                  className="icon-settings"
-                  src={user.icon}
-                  width="400"
-                  height="400"
-                  alt="icon"
-                />
-              ) : (
-                <Image
-                  className="icon-settings"
-                  src={iconDefault}
-                  width="400"
-                  height="400"
-                  alt="iconDefault"
-                />
-              )}
+              <div>
+                {user.icon ? (
+                  <Image
+                    className="icon-settings"
+                    src={user.icon}
+                    width="400"
+                    height="400"
+                    alt="icon"
+                  />
+                ) : (
+                  <Image
+                    className="icon-settings"
+                    src={iconDefault}
+                    width="400"
+                    height="400"
+                    alt="iconDefault"
+                  />
+                )}
+              </div>
+
               <div className="rainbow__button">
                 <label htmlFor="icon">Edit profile picture</label>
                 <input
