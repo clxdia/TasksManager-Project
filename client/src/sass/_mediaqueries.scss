@@ -59,6 +59,16 @@ $breakpoint-tablet: 1075px;
     }
   }
 
+  .login__image {
+    position: fixed;
+  }
+
+  .form__container {
+    background-color: white;
+    margin-top: 30vh !important;
+    z-index: 5;
+  }
+
   .menu__modal {
     position: fixed;
     z-index: 2 !important;

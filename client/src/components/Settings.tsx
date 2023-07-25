@@ -9,17 +9,12 @@ import iconDefault from "../assets/random/user.png";
 import DeleteUser from "@/tools/DeleteUser";
 
 const Settings = () => {
-  const [isEditing, setIsEditing] = useState<boolean>(false);
   const [file, setFile] = useState<any | null>(null);
   const [picture, setPicture] = useState<any | null>(null);
-  const [selectedImage, setSelectedImage] = useState<any | null>(null);
-  const [hasChangedImage, setHasChangedImage] = useState<boolean>(false);
 
   const cookies = new Cookies();
   const user = getUserCookie();
   const [updatedUser, setUpdatedUser] = useState<User>(user);
-
-  console.log(file);
 
   const [pendingFile, setPendingFile] = useState<any>(null);
 
@@ -80,8 +75,6 @@ const Settings = () => {
       } else {
         await editUser(updatedUser);
       }
-      setHasChangedImage(false);
-      setSelectedImage(null);
       window.location.reload();
     } catch (err) {
       console.log("error updating icon: ", err);
