@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import getUserCookie from "@/hooks/getUserCookie";
 import Cookies from "universal-cookie";
 import User from "@/interfaces/User";
@@ -10,16 +10,24 @@ import DeleteUser from "@/tools/DeleteUser";
 
 const Settings = () => {
   const [isEditing, setIsEditing] = useState<boolean>(false);
-  const [image, setImage] = useState<any | null>(null);
+  const [file, setFile] = useState<any | null>(null);
   const [picture, setPicture] = useState<any | null>(null);
+  const [selectedImage, setSelectedImage] = useState<any | null>(null);
+  const [hasChangedImage, setHasChangedImage] = useState<boolean>(false);
 
   const cookies = new Cookies();
   const user = getUserCookie();
   const [updatedUser, setUpdatedUser] = useState<User>(user);
 
-  const handleEdit = () => {
-    setIsEditing(!isEditing);
-  };
+  console.log(file);
+
+  const [pendingFile, setPendingFile] = useState<any>(null);
+
+  useEffect(() => {
+    if (file) {
+      setPendingFile(URL.createObjectURL(file));
+    }
+  }, [file]);
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -31,24 +39,30 @@ const Settings = () => {
     }));
   };
 
-  const preset_key = "vjgcmajz";
+  const upload_preset = "jmjnmfi9";
   const cloud_name = "duhjwpbzr";
 
   const submitImage = async () => {
     const data = new FormData();
-    data.append("file", image);
-    data.append("upload_preset", preset_key);
+    data.append("file", file);
+    data.append("upload_preset", upload_preset);
     data.append("cloud_name", cloud_name);
 
     try {
-      const res = await axios.post(
+      const res = await fetch(
         `https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`,
-        data,
         {
-          withCredentials: false,
+          method: "POST",
+          body: data,
         }
       );
-      const cloudinaryUrl = res.data.secure_url;
+
+      if (!res.ok) {
+        throw new Error("failed to upload icon");
+      }
+
+      const resData = await res.json();
+      const cloudinaryUrl = resData.secure_url;
       setPicture(cloudinaryUrl);
 
       const updatedUserWithImage = { ...updatedUser, icon: cloudinaryUrl };
@@ -61,11 +75,13 @@ const Settings = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      if (image) {
+      if (file) {
         await submitImage();
       } else {
         await editUser(updatedUser);
       }
+      setHasChangedImage(false);
+      setSelectedImage(null);
       window.location.reload();
     } catch (err) {
       console.log("error updating icon: ", err);
@@ -80,7 +96,6 @@ const Settings = () => {
         process.env.MONGODB_URL + `/users/${user?._id}`,
         updatedUser,
         {
-          // .patch(`http://localhost:3005` + `/users/${user?._id}`, updatedUser, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -131,10 +146,10 @@ const Settings = () => {
           <form onSubmit={handleSubmit} className="form-settings">
             <div className="form-settings__left">
               <div>
-                {user.icon ? (
+                {pendingFile ? (
                   <Image
                     className="icon-settings"
-                    src={user.icon}
+                    src={pendingFile}
                     width="400"
                     height="400"
                     alt="icon"
@@ -142,7 +157,7 @@ const Settings = () => {
                 ) : (
                   <Image
                     className="icon-settings"
-                    src={iconDefault}
+                    src={user?.icon || iconDefault}
                     width="400"
                     height="400"
                     alt="iconDefault"
@@ -156,7 +171,7 @@ const Settings = () => {
                   type="file"
                   name="icon"
                   className="input-settings"
-                  onChange={(e) => setImage(e.target.files?.[0] || null)}
+                  onChange={(e) => setFile(e.target.files?.[0] || null)}
                 />
               </div>
             </div>
