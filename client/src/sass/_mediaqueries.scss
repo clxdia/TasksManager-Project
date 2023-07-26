@@ -338,8 +338,12 @@ $breakpoint-tablet: 1075px;
 
     .completion,
     .intro__section__text {
-      text-align: center;
       width: 100% !important;
+      text-align: center !important;
+
+      h2 {
+        text-align: center !important;
+      }
     }
   }
 
