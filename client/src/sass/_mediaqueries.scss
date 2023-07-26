@@ -272,7 +272,10 @@ $breakpoint-tablet: 1075px;
     display: flex;
     flex-direction: column;
     position: relative;
+    height: auto;
     min-height: auto;
+    margin-bottom: 0px !important;
+    padding-bottom: 0px !important;
 
     &__background {
       position: fixed;
@@ -280,7 +283,6 @@ $breakpoint-tablet: 1075px;
       left: 0;
       width: 100%;
       height: 100%;
-      z-index: -1;
       background-image: url("../assets/backgrounds/login.png");
       background-size: contain;
       background-repeat: no-repeat;
@@ -319,6 +321,10 @@ $breakpoint-tablet: 1075px;
     .introduction {
       width: 85%;
     }
+  }
+
+  .section-home {
+    height: max-content;
   }
 
   .intro__section {
