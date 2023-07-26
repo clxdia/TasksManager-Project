@@ -22,8 +22,7 @@
 
   .author {
     font-style: oblique !important;
-
-    font-size: 1.4vmax;
+    font-size: 12px;
   }
 
   .title__icon {
@@ -82,7 +81,13 @@
 
   .content__below {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
+
+    &__icons {
+      justify-content: space-between;
+      font-size: 16px;
+    }
 
     div {
       display: flex;
