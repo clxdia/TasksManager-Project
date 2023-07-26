@@ -31,6 +31,10 @@ function Menu({ setSettings }: MenuProps) {
     setMenu(false);
   };
 
+  const goHome = () => {
+    setSettings(false);
+  };
+
   const handleHomepage = () => {
     setSettings(false);
   };
@@ -146,9 +150,10 @@ function Menu({ setSettings }: MenuProps) {
               width="400"
               height="400"
               alt="icon"
+              onClick={goHome}
             />
           ) : (
-            <FaRegCircleUser size={30} />
+            <FaRegCircleUser size={30} onClick={goHome} />
           )}
         </div>
         <div className="mobile__menu__add">

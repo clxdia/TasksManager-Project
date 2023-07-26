@@ -73,6 +73,14 @@ $breakpoint-tablet: 1075px;
     .tasks__toggle {
       display: flex;
       justify-content: space-between;
+
+      .form__buttons--active {
+        padding-bottom: 0px !important;
+      }
+
+      .tasks--active {
+        color: black !important;
+      }
     }
   }
 
@@ -107,7 +115,7 @@ $breakpoint-tablet: 1075px;
 
   .logout {
     position: absolute;
-    bottom: 30px;
+    bottom: 15vh;
     display: flex;
     align-items: center;
     gap: 20px;
@@ -169,7 +177,11 @@ $breakpoint-tablet: 1075px;
     &__text {
       h3 {
         font-size: 20px !important;
-        font-weight: 600;
+        font-weight: 500;
+      }
+
+      h4 {
+        font-weight: 500;
       }
     }
 
@@ -441,8 +453,13 @@ $breakpoint-tablet: 1075px;
       gap: 0px;
 
       &__left {
+        width: 100px;
+        height: 100px;
+        background-size: cover;
+
         img {
           width: 100px;
+          height: 100px;
         }
 
         display: flex !important;
