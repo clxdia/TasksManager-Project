@@ -1,6 +1,7 @@
 import { Inter } from "next/font/google";
 import { UserProvider } from "@/hooks/userContext";
 import "../sass/global.scss";
+import "../sass/fonts/fonts.css";
 
 const inter = Inter({ subsets: ["latin"] });
 

@@ -20,6 +20,7 @@ const Form = ({ setIsLoggedIn }: FormProps) => {
   return (
     <div className="parallax">
       <section className="login" id="form">
+        <div className="login__background"></div>
         <div className="login__image"></div>
         <div className="form__container">
           <div className="form">
