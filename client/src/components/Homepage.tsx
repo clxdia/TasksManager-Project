@@ -90,8 +90,12 @@ export default function Homepage(): JSX.Element {
                           </ul>
                         </div>
                       </div>
-                      <hr></hr>
-                      <i className="author">by @{task?.author}</i>
+                      <div className="content__below">
+                        <hr></hr>
+                        <div className="content__below__icons">
+                          <i className="author">by @{task?.author}</i>
+                        </div>
+                      </div>
                     </li>
                   ))}
                 </ul>
@@ -156,8 +160,12 @@ export default function Homepage(): JSX.Element {
                           </ul>
                         </div>
                       </div>
-                      <hr></hr>
-                      <i className="author">by @{task?.author}</i>
+                      <div className="content__below">
+                        <hr></hr>
+                        <div className="content__below__icons">
+                          <i className="author">by @{task?.author}</i>
+                        </div>
+                      </div>
                     </li>
                   ))}
                 </ul>

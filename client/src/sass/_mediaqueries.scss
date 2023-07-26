@@ -223,14 +223,36 @@ $breakpoint-tablet: 1075px;
       display: flex;
       flex-direction: row !important;
       overflow: scroll;
-      width: max-content;
+      width: max-content + 10px;
       height: 35vh;
       align-items: center;
 
       .tasks__ui {
         padding: 10px;
-        width: 100px;
-        height: max-content;
+        height: 200px;
+        min-width: 130px;
+        position: relative;
+
+        .content__below {
+          position: absolute;
+          bottom: 10px;
+          width: 85%;
+          flex-direction: column;
+
+          hr {
+            margin: 5px 0px 10px 0px;
+          }
+
+          &__icons {
+            justify-content: space-between;
+
+            .author {
+              i {
+                font-size: 20px !important;
+              }
+            }
+          }
+        }
 
         h4 {
           font-size: 12px;
@@ -246,13 +268,21 @@ $breakpoint-tablet: 1075px;
           font-size: 10px;
         }
 
-        .tags__wrapper {
-          width: 100px !important;
+        .desc {
+          max-height: 70%;
           overflow: scroll;
+        }
+
+        .tags__wrapper {
+          width: 100%;
+          overflow: scroll;
+          height: auto;
 
           .tags {
+            margin-top: 5px;
             display: flex;
             overflow: scroll;
+            align-items: center;
             width: max-content;
           }
         }
@@ -325,6 +355,9 @@ $breakpoint-tablet: 1075px;
 
   .section-home {
     height: max-content;
+    min-height: auto;
+    margin-top: 0px !important;
+    padding-top: 0px !important;
   }
 
   .intro__section {

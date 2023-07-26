@@ -17,18 +17,21 @@ export default function CompletedTasks({ completedTasks }: Props): JSX.Element {
           <div>
             <p className="desc">{task?.desc}</p>
             <p className="date">{task?.due_date}</p>
-
-            <ul className="tags">
-              {task.tags.map((tag) => (
-                <li className="tags__completed" key={tag}>
-                  <p>#{tag}</p>
-                </li>
-              ))}
-            </ul>
+            <div className="tags__wrapper">
+              <ul className="tags">
+                {task?.tags?.map((tag) => (
+                  <li className="tags__completed" key={tag}>
+                    <p>#{tag}</p>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
-          <hr></hr>
-          <div className="content__below--completed">
-            <DeleteTask task={task} />
+          <div className="content__below content__below--completed">
+            <hr></hr>
+            <div className="content__below__icons">
+              <DeleteTask task={task} />
+            </div>
           </div>
         </li>
       ))}

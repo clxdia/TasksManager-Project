@@ -29,14 +29,17 @@ const UserTasks = ({ myTasks }: Props) => {
               </ul>
             </div>
           </div>
-          <hr></hr>
+
           <div className="content__below">
-            <div>
-              <EditTask task={task} />
-              <DeleteTask task={task} />
-            </div>
-            <div>
-              <AddCompleted task={task} />
+            <hr></hr>
+            <div className="content__below__icons">
+              <div>
+                <EditTask task={task} />
+                <DeleteTask task={task} />
+              </div>
+              <div>
+                <AddCompleted task={task} />
+              </div>
             </div>
           </div>
         </li>
