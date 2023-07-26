@@ -224,13 +224,13 @@ $breakpoint-tablet: 1075px;
       flex-direction: row !important;
       overflow: scroll;
       width: max-content + 10px;
-      height: 35vh;
+      height: 36vh;
       align-items: center;
 
       .tasks__ui {
         padding: 10px;
-        height: 200px;
-        min-width: 130px;
+        height: 220px;
+        min-width: 150px;
         position: relative;
 
         .content__below {
@@ -255,7 +255,7 @@ $breakpoint-tablet: 1075px;
         }
 
         h4 {
-          font-size: 12px;
+          font-size: 15px;
         }
 
         svg {
@@ -269,7 +269,7 @@ $breakpoint-tablet: 1075px;
         }
 
         .desc {
-          max-height: 70%;
+          max-height: 40%;
           overflow: scroll;
         }
 
