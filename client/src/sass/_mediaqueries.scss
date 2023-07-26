@@ -1,5 +1,6 @@
 $breakpoint-mobile: 790px;
 $breakpoint-tablet: 1075px;
+$breakpoint-tv: 3840px;
 
 @media (max-width: $breakpoint-tablet) {
   h1 {
