@@ -265,11 +265,12 @@ $breakpoint-tablet: 1075px;
         .desc,
         .date,
         .tags {
-          font-size: 10px;
+          font-size: 12px;
         }
 
         .desc {
-          max-height: 40%;
+          max-height: 85px;
+          min-height: 85px;
           overflow: scroll;
         }
 
