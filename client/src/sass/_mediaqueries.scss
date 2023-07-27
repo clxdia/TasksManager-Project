@@ -62,6 +62,17 @@ $breakpoint-tv: 3840px;
 
   .menu__modal {
     z-index: 2 !important;
+
+    &__ui {
+      gap: 0px !important;
+      padding: 30px !important;
+      height: auto;
+
+      form {
+        margin-top: 10px !important;
+        gap: 0px !important;
+      }
+    }
   }
 
   .tasks__mobile {
@@ -425,9 +436,16 @@ $breakpoint-tv: 3840px;
       width: 100% !important;
       margin: auto;
 
+      .header__welcome {
+        min-height: 0px !important;
+        max-height: 145px !important;
+      }
+
       .header__welcome,
       .card {
         width: auto !important;
+        min-height: 0px !important;
+        max-height: 145px !important;
 
         div {
           text-align: right;
@@ -465,6 +483,7 @@ $breakpoint-tv: 3840px;
 
         display: flex !important;
         flex-direction: row;
+        justify-content: space-between;
       }
 
       &__left,

@@ -47,6 +47,7 @@
   .header__welcome {
     width: 90% !important;
     flex-direction: row-reverse;
+    min-height: 150px;
 
     img {
       left: 3rem !important;

@@ -56,7 +56,7 @@
   flex-direction: column;
   width: 30vw;
   position: fixed;
-
+  max-width: 800px;
   z-index: 1;
 
   &__buttons {

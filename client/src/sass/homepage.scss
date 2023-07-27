@@ -6,6 +6,8 @@
 .homepage {
   padding: 15px;
   display: flex;
+  max-width: 2000px;
+  margin: auto;
 
   .menu__wrapper {
     display: block;
@@ -24,6 +26,7 @@
     height: auto;
     right: 1vw;
     bottom: 0;
+    max-width: 250px;
   }
 }
 
@@ -34,8 +37,6 @@
 
 .main {
   width: 100%;
-  max-width: 1900px;
-  margin: auto;
 
   header {
     margin-bottom: 20px;

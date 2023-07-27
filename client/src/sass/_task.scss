@@ -13,6 +13,10 @@
   max-width: 320px !important;
   position: relative;
 
+  textarea {
+    font-family: inherit;
+  }
+
   hr {
     width: 100%;
     border: none;
@@ -23,6 +27,13 @@
   .author {
     font-style: oblique !important;
     font-size: 12px;
+    position: relative;
+    z-index: 0;
+
+    i {
+      position: relative;
+      z-index: 0;
+    }
   }
 
   .title__icon {

@@ -93,7 +93,7 @@ export default function Homepage(): JSX.Element {
                       <div className="content__below">
                         <hr></hr>
                         <div className="content__below__icons">
-                          <i className="author">by @{task?.author}</i>
+                          <p className="author">by @{task?.author}</p>
                         </div>
                       </div>
                     </li>
@@ -154,7 +154,7 @@ export default function Homepage(): JSX.Element {
                           <ul className="tags">
                             {task?.tags?.map((tag) => (
                               <li className="tags__all" key={tag}>
-                                <p>#{tag}</p>
+                                <i>#{tag}</i>
                               </li>
                             ))}
                           </ul>
@@ -163,7 +163,7 @@ export default function Homepage(): JSX.Element {
                       <div className="content__below">
                         <hr></hr>
                         <div className="content__below__icons">
-                          <i className="author">by @{task?.author}</i>
+                          <p className="author">by @{task?.author}</p>
                         </div>
                       </div>
                     </li>
