@@ -49,7 +49,7 @@ export default function Homepage(): JSX.Element {
   return (
     <div className="homepage">
       <Menu setSettings={setSettings} />
-      <main className="main">
+      <div className="main">
         {settings ? (
           <Settings />
         ) : (
@@ -173,7 +173,7 @@ export default function Homepage(): JSX.Element {
             </div>
           </>
         )}
-      </main>
+      </div>
     </div>
   );
 }

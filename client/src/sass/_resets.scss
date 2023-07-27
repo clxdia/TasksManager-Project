@@ -1,3 +1,5 @@
+@import "variables";
+
 html,
 body,
 div,
@@ -81,4 +83,8 @@ input
 
 input {
   font-size: 16px;
+}
+
+button {
+  font-family: $luxora !important;
 }

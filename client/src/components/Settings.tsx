@@ -127,7 +127,7 @@ const Settings = () => {
           <h3>Log out</h3>
         </div>
       </aside>
-      <main>
+      <div className="settings__main">
         <header className="header__welcome card ">
           <div>
             {user ? <h1>Hello, {user.name}!</h1> : <h1>Loading user...</h1>}
@@ -135,7 +135,7 @@ const Settings = () => {
           </div>
           <Image src={friend1} width="500" height="500" alt="friend" />
         </header>
-        <div className="form-container">
+        <section className="form-container">
           <form onSubmit={handleSubmit} className="form-settings">
             <div className="form-settings__left">
               <div>
@@ -204,8 +204,8 @@ const Settings = () => {
               </div>
             </div>
           </form>
-        </div>
-      </main>
+        </section>
+      </div>
     </div>
   );
 };

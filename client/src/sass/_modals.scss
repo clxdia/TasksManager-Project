@@ -43,9 +43,19 @@
     }
   }
 
-  &__ui--editing {
+  &__ui--editing,
+  &__ui--ask {
     display: flex;
     flex-direction: column;
+
+    .buttons {
+      margin-top: 20px;
+      justify-content: space-around;
+
+      &__delete {
+        background-color: #ee3c2c;
+      }
+    }
   }
 
   &__form {
@@ -81,34 +91,31 @@
         flex-direction: column;
       }
     }
+  }
+}
 
-    .buttons {
-      display: flex;
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
 
-      justify-content: space-between;
-      margin-top: 20px;
+  button {
+    width: 100%;
+    padding: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 300ms;
 
-      button {
-        font-family: $luxora;
-        width: 100%;
-        padding: 15px;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: transform 300ms;
-
-        &:hover {
-          transform: translateY(-4px);
-          transition: transform 300ms;
-        }
-      }
-
-      &__cancel {
-        margin-top: 10px;
-
-        padding: 0px !important;
-        border: 1px solid $dark-grey;
-        font-weight: 700;
-      }
+    &:hover {
+      transform: translateY(-4px);
+      transition: transform 300ms;
     }
+  }
+
+  &__cancel {
+    color: black;
+    padding: 0px !important;
+    border: 1px solid $dark-grey;
+    font-weight: 600;
   }
 }
