@@ -199,7 +199,7 @@ const Settings = () => {
                 >
                   Save changes
                 </button>
-                <hr></hr>
+
                 <DeleteUser />
               </div>
             </div>

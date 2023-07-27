@@ -61,7 +61,7 @@ $breakpoint-tv: 3840px;
   }
 
   .settings__main {
-    width: 95% !important;
+    width: 100% !important;
   }
 
   .menu__modal {
@@ -436,28 +436,23 @@ $breakpoint-tv: 3840px;
       display: none !important;
     }
 
-    main {
-      width: 100% !important;
-      margin: auto;
+    .header__welcome {
+      min-height: 0px !important;
+      max-height: 145px !important;
+      width: auto !important;
+    }
 
-      .header__welcome {
-        min-height: 0px !important;
-        max-height: 145px !important;
+    .header__welcome,
+    .card {
+      min-height: 0px !important;
+      max-height: 145px !important;
+
+      div {
+        text-align: right;
       }
 
-      .header__welcome,
-      .card {
-        width: auto !important;
-        min-height: 0px !important;
-        max-height: 145px !important;
-
-        div {
-          text-align: right;
-        }
-
-        img {
-          left: 0px !important;
-        }
+      img {
+        left: 0px !important;
       }
     }
 
