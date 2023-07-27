@@ -83,7 +83,7 @@ function Menu({ setSettings }: MenuProps) {
               </div>
               <h1>Add task</h1>
               <h2>Add a new task here!</h2>
-              <div className="buttons">
+              <div className="">
                 <AddTask />
               </div>
             </div>

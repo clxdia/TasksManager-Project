@@ -140,20 +140,16 @@ const Settings = () => {
             <div className="form-settings__left">
               <div>
                 {pendingFile ? (
-                  <Image
+                  <div
                     className="icon-settings"
-                    src={pendingFile}
-                    width="400"
-                    height="400"
-                    alt="icon"
+                    style={{ backgroundImage: `url(${pendingFile})` }}
                   />
                 ) : (
-                  <Image
+                  <div
                     className="icon-settings"
-                    src={user?.icon || iconDefault}
-                    width="400"
-                    height="400"
-                    alt="iconDefault"
+                    style={{
+                      backgroundImage: `url(${user?.icon || iconDefault})`,
+                    }}
                   />
                 )}
               </div>
