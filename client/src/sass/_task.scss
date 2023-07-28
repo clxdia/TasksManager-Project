@@ -99,6 +99,10 @@
     &__icons {
       justify-content: space-between;
       font-size: 16px;
+
+      &__left {
+        gap: 10px;
+      }
     }
 
     div {

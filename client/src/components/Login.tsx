@@ -57,7 +57,10 @@ const Login = ({ setIsLoggedIn, toggleLogin }: LoginProps) => {
           type="password"
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button onClick={handleSubmit} className="rainbow__button">
+        <button
+          onClick={handleSubmit}
+          className="rainbow__button__login rainbow__button"
+        >
           Login
         </button>
         {incorrectData && (
@@ -66,12 +69,7 @@ const Login = ({ setIsLoggedIn, toggleLogin }: LoginProps) => {
           </p>
         )}
         {noUser && (
-          <p className="warning">
-            No account registered with this username.
-            {/* <button onClick={() => setActiveComponent("signup")}>
-              Please click here to sign up.
-            </button> */}
-          </p>
+          <p className="warning">No account registered with this username.</p>
         )}
       </form>
       <p>

@@ -34,7 +34,7 @@ const UserTasks = ({ myTasks }: Props) => {
             <div className="content__below">
               <hr></hr>
               <div className="content__below__icons">
-                <div>
+                <div className="content__below__icons__left">
                   <EditTask task={task} />
                   <DeleteTask task={task} />
                 </div>

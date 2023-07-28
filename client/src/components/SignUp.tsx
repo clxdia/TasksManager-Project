@@ -114,7 +114,7 @@ const SignUp = ({ toggleLogin, toggleComponent }: SignUpProps) => {
 
         <button
           type="submit"
-          className="rainbow__button"
+          className="rainbow__button__login rainbow__button"
           onClick={handleSubmit}
         >
           Sign up!
