@@ -154,7 +154,7 @@ export default function Homepage(): JSX.Element {
                           <ul className="tags">
                             {task?.tags?.map((tag) => (
                               <li className="tags__all" key={tag}>
-                                <i>#{tag}</i>
+                                <p>#{tag}</p>
                               </li>
                             ))}
                           </ul>

@@ -55,12 +55,9 @@ function Menu({ setSettings }: MenuProps) {
         <div className="menu">
           <div>
             {user.icon ? (
-              <Image
+              <div
                 className="pfp"
-                src={user.icon}
-                width="400"
-                height="400"
-                alt="icon"
+                style={{ backgroundImage: `url(${user.icon})` }}
               />
             ) : (
               <FaRegCircleUser size={30} />
@@ -106,12 +103,9 @@ function Menu({ setSettings }: MenuProps) {
                 <div className="mobile__menu__content">
                   <div className="mobile__menu__pfp">
                     {user?.icon ? (
-                      <Image
-                        className="pfp"
-                        src={user.icon}
-                        width="400"
-                        height="400"
-                        alt="icon"
+                      <div
+                        className="pfp icon-settings"
+                        style={{ backgroundImage: `url(${user.icon})` }}
                       />
                     ) : (
                       <FaRegCircleUser size={30} />
@@ -144,16 +138,13 @@ function Menu({ setSettings }: MenuProps) {
         )}
         <div className="mobile__menu__pfp">
           {user.icon ? (
-            <Image
+            <div
+              onClick={() => setSettings(false)}
               className="pfp"
-              src={user.icon}
-              width="400"
-              height="400"
-              alt="icon"
-              onClick={goHome}
+              style={{ backgroundImage: `url(${user.icon})` }}
             />
           ) : (
-            <FaRegCircleUser size={30} onClick={goHome} />
+            <FaRegCircleUser onClick={() => setSettings(false)} size={30} />
           )}
         </div>
         <div className="mobile__menu__add">

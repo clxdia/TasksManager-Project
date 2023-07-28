@@ -32,28 +32,27 @@ function DeleteTask({ task }: TaskProps) {
       });
   };
 
-  if (ask) {
-    return (
-      <div className="menu__modal">
-        <div className="menu__modal__ui menu__modal__ui--ask">
-          <h1>Are you sure you want to delete this task?</h1>
-          <h2>This action cannot be undone.</h2>
-          <div className="buttons">
-            <button className="buttons__delete" onClick={handleDelete}>
-              Delete
-            </button>
-            <button className="buttons__cancel" onClick={() => setAsk(false)}>
-              Cancel
-            </button>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div>
       <AiOutlineDelete onClick={() => setAsk(true)} />
+      {ask ? (
+        <div className="menu__modal">
+          <div className="menu__modal__ui menu__modal__ui--ask">
+            <h1>Are you sure you want to delete this task?</h1>
+            <h2>This action cannot be undone.</h2>
+            <div className="buttons">
+              <button className="buttons__delete" onClick={handleDelete}>
+                Delete
+              </button>
+              <button className="buttons__cancel" onClick={() => setAsk(false)}>
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <></>
+      )}
     </div>
   );
 }
