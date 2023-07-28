@@ -156,14 +156,6 @@ const Settings = () => {
                       })`,
                     }}
                   />
-                  // <div
-                  //   className="icon-settings"
-                  //   style={{
-                  //     backgroundImage: `url("${iconDefault.src}")`,
-                  //   }}
-                  // />
-
-                  // <Image src={iconDefault} width={30} height={30} alt="ok" />
                 )}
               </div>
 
