@@ -475,6 +475,11 @@ $breakpoint-tv: 3840px;
         height: 100px;
         background-size: cover;
 
+        .icon-settings {
+          max-width: 130px;
+          max-height: 130px;
+        }
+
         img {
           width: 100px;
           height: 100px;

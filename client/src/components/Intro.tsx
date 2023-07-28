@@ -92,10 +92,9 @@ const Intro = () => {
             <div className="intro__section__text">
               <h1>Sign Up Today and Supercharge Your Productivity</h1>
               <h2>
-                Start managing your tasks effectively and bring order to your
-                daily life. Join now by signing up now and unlock the full
-                potential of the task manager website. Together, let&#39;s make
-                each day more productive and fulfilling!
+                Sign up now and unlock the full potential of the task manager
+                website. Together, let&#39;s make each day more productive and
+                fulfilling!
               </h2>
               <button
                 className="intro__button rainbow__button"

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import getUserCookie from "@/hooks/getUserCookie";
 import Cookies from "universal-cookie";
 import User from "@/interfaces/User";
@@ -112,6 +112,9 @@ const Settings = () => {
     }
   };
 
+  const iconFallback = iconDefault;
+  console.log(iconDefault);
+
   return (
     <div className="settings">
       <aside className="menu">
@@ -148,9 +151,19 @@ const Settings = () => {
                   <div
                     className="icon-settings"
                     style={{
-                      backgroundImage: `url(${user?.icon || iconDefault})`,
+                      backgroundImage: `url(${
+                        user.icon === "" ? iconDefault.src : user.icon
+                      })`,
                     }}
                   />
+                  // <div
+                  //   className="icon-settings"
+                  //   style={{
+                  //     backgroundImage: `url("${iconDefault.src}")`,
+                  //   }}
+                  // />
+
+                  // <Image src={iconDefault} width={30} height={30} alt="ok" />
                 )}
               </div>
 
