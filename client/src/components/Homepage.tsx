@@ -139,9 +139,9 @@ export default function Homepage(): JSX.Element {
                   <CompletedTasks completedTasks={completedTasks} />
                 </div>
               )}
-              <h3 className="tasks__all__title">ALL TASKS</h3>
+              <h3 className="tasks__all__title ">ALL TASKS</h3>
               <div className="tasks__all  tasks__containers">
-                <ul className="tasks__all__cards">
+                <ul className="tasks__all__cards tasks__all__cards--mobile">
                   {allTasks?.map((task: Task) => (
                     <li key={task._id} className="tasks__ui tasks__ui-all">
                       <div className="title__icon">

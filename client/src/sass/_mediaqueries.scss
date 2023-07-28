@@ -254,6 +254,7 @@ $breakpoint-tv: 3840px;
       width: max-content + 10px;
       height: 36vh;
       align-items: center;
+      flex-wrap: nowrap;
 
       .tasks__ui {
         padding: 10px;
