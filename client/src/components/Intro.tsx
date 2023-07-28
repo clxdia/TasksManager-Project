@@ -110,7 +110,7 @@ const Intro = () => {
         <div>
           <h1>TaskFlow</h1>
           <hr></hr>
-          <p>© 2023 lain</p>
+          <p>© 2023 clxdia</p>
           <i>Illustrations by @macrovector on FreePik</i>
         </div>
       </footer>
