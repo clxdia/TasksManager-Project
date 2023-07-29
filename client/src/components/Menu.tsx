@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { IoMdAddCircle } from "react-icons/io";
+import { IoMdAddCircle, IoMdHome } from "react-icons/io";
 import { BiLogOutCircle } from "react-icons/bi";
 import Image from "next/image";
 import AddTask from "../tools/AddTask";
@@ -10,6 +10,8 @@ import getUsernameFromCookie from "@/hooks/getUserCookie";
 import { FaRegCircleUser } from "react-icons/fa6";
 import { CgClose } from "react-icons/cg";
 import add from "../assets/random/add.png";
+import iconDefault from "../assets/random/user.png";
+import { GoHomeFill } from "react-icons/go";
 
 interface MenuProps {
   setSettings: (value: boolean) => void;
@@ -20,6 +22,7 @@ function Menu({ setSettings }: MenuProps) {
   const [modal, setModal] = useState<boolean>(false);
   const user = getUsernameFromCookie();
   const [menu, setMenu] = useState<boolean>(false);
+  const [homeIcon, setHomeIcon] = useState<boolean>(false);
 
   const handleModal = () => {
     setMenu(false);
@@ -29,14 +32,12 @@ function Menu({ setSettings }: MenuProps) {
   const handleSettings = () => {
     setSettings(true);
     setMenu(false);
-  };
-
-  const goHome = () => {
-    setSettings(false);
+    setHomeIcon(true);
   };
 
   const handleHomepage = () => {
     setSettings(false);
+    setHomeIcon(false);
   };
 
   const handleLogout = () => {
@@ -90,7 +91,7 @@ function Menu({ setSettings }: MenuProps) {
         )}
       </div>
       <div className="mobile__menu">
-        <HiOutlineMenuAlt2 size={30} onClick={toggleMenu} />
+        <HiOutlineMenuAlt2 size={35} onClick={toggleMenu} />
         {menu ? (
           <div className="mobile__menu--toggled">
             <div className="mobile__menu__purple">
@@ -104,7 +105,7 @@ function Menu({ setSettings }: MenuProps) {
                   <div className="mobile__menu__pfp">
                     {user?.icon ? (
                       <div
-                        className="pfp icon-settings"
+                        className="pfp--menu pfp icon-settings"
                         style={{ backgroundImage: `url(${user.icon})` }}
                       />
                     ) : (
@@ -137,15 +138,27 @@ function Menu({ setSettings }: MenuProps) {
           <></>
         )}
         <div className="mobile__menu__pfp">
-          {user.icon ? (
-            <div
-              onClick={() => setSettings(false)}
-              className="pfp"
-              style={{ backgroundImage: `url(${user.icon})` }}
-            />
+          {homeIcon ? (
+            <IoMdHome size={35} onClick={handleHomepage} />
           ) : (
-            <FaRegCircleUser onClick={() => setSettings(false)} size={30} />
+            <div
+              className="pfp"
+              style={{
+                backgroundImage: `url(${
+                  user.icon === "" ? iconDefault.src : user.icon
+                })`,
+              }}
+            />
           )}
+          {/* // {user.icon ? (
+          //   <div
+          //     onClick={() => setSettings(false)}
+          //     className="pfp"
+          //     style={{ backgroundImage: `url(${user.icon})` }}
+          //   />
+          // ) : (
+          //   <FaRegCircleUser onClick={() => setSettings(false)} size={30} />
+          // )} */}
         </div>
         <div className="mobile__menu__add">
           <Image

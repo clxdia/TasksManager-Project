@@ -40,7 +40,7 @@ const Login = ({ setIsLoggedIn, toggleLogin }: LoginProps) => {
   };
 
   return (
-    <div>
+    <div className="login-signup">
       <h2>
         Welcome back! Please log in with your credentials to access your tasks.
       </h2>

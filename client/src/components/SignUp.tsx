@@ -70,7 +70,7 @@ const SignUp = ({ toggleLogin, toggleComponent }: SignUpProps) => {
   };
 
   return (
-    <div className="">
+    <div className="login-signup">
       <h2>
         Welcome! To get started, please create an account by providing your
         credentials.
