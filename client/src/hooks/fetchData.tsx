@@ -11,7 +11,6 @@ interface FetchDataResponse {
 
 const useFetchData = (endpoint: string): FetchDataResponse | null => {
   const [data, setData] = useState<FetchDataResponse | null>(null);
-  // const baseUrl = process.env.MONGODB_URL;
   const baseUrl = process.env.MONGODB_URL;
   const cookies = new Cookies();
 

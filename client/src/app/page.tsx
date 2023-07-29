@@ -1,9 +1,7 @@
 "use client";
 
 import Form from "@/components/Form";
-import LoadingHomepage from "@/components/Loading";
 import getUsernameFromCookie from "@/hooks/getUserCookie";
-import { UserContext } from "@/hooks/userContext";
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import Homepage from "../components/Homepage";

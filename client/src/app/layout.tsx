@@ -1,5 +1,4 @@
 import { Inter } from "next/font/google";
-import { UserProvider } from "@/hooks/userContext";
 import "../sass/global.scss";
 import "../sass/fonts/fonts.css";
 
@@ -20,12 +19,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <UserProvider>
-      <html lang="en" className={inter.className}>
-        <body>
-          <main className="main">{children}</main>
-        </body>
-      </html>
-    </UserProvider>
+    <html lang="en" className={inter.className}>
+      <body>
+        <main className="main">{children}</main>
+      </body>
+    </html>
   );
 }
