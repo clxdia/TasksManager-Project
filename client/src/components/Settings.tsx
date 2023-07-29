@@ -11,6 +11,7 @@ import DeleteUser from "@/tools/DeleteUser";
 const Settings = () => {
   const [file, setFile] = useState<any | null>(null);
   const [picture, setPicture] = useState<any | null>(null);
+  const [error, setError] = useState<boolean>(false);
 
   const cookies = new Cookies();
   const user = getUserCookie();
@@ -34,10 +35,15 @@ const Settings = () => {
     }));
   };
 
-  const upload_preset = "jmjnmfi9";
-  const cloud_name = "duhjwpbzr";
-
   const submitImage = async () => {
+    const upload_preset = process.env.CLOUDINARY_PRESET_KEY || "";
+    const cloud_name = process.env.CLOUDINARY_CLOUD_NAME || "";
+
+    if (!upload_preset || !cloud_name) {
+      console.error("Server error");
+      return;
+    }
+
     const data = new FormData();
     data.append("file", file);
     data.append("upload_preset", upload_preset);
@@ -63,7 +69,7 @@ const Settings = () => {
       const updatedUserWithImage = { ...updatedUser, icon: cloudinaryUrl };
       await editUser(updatedUserWithImage);
     } catch (err) {
-      console.log("error uploading icon", err);
+      setError(true);
     }
   };
 
@@ -75,9 +81,10 @@ const Settings = () => {
       } else {
         await editUser(updatedUser);
       }
+
       window.location.reload();
     } catch (err) {
-      console.log("error updating icon: ", err);
+      setError(true);
     }
   };
 
@@ -106,14 +113,10 @@ const Settings = () => {
 
       const updatedUserFromServer = response.data;
       document.cookie = `user=${JSON.stringify(updatedUserFromServer)}; path=/`;
-      console.log("Updated User:", updatedUserFromServer);
     } catch (err) {
-      console.log("error updating user: ", err);
+      setError(true);
     }
   };
-
-  const iconFallback = iconDefault;
-  console.log(iconDefault);
 
   return (
     <div className="settings">
@@ -139,6 +142,12 @@ const Settings = () => {
           <Image src={friend1} width="500" height="500" alt="friend" />
         </header>
         <section className="form-container">
+          {error && (
+            <h2>
+              There was an error updating your credentials. Please try again
+              later.
+            </h2>
+          )}
           <form onSubmit={handleSubmit} className="form-settings">
             <div className="form-settings__left">
               <div>
@@ -200,7 +209,6 @@ const Settings = () => {
                 >
                   Save changes
                 </button>
-
                 <DeleteUser />
               </div>
             </div>

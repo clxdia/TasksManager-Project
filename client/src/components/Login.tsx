@@ -11,6 +11,7 @@ const Login = ({ setIsLoggedIn, toggleLogin }: LoginProps) => {
   const [password, setPassword] = useState<string>();
   const [incorrectData, setIncorrectData] = useState<boolean>(false);
   const [noUser, setNoUser] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(false);
   const [activeComponent, setActiveComponent] = useState<"login" | "signup">(
     "login"
   );
@@ -35,7 +36,7 @@ const Login = ({ setIsLoggedIn, toggleLogin }: LoginProps) => {
         }
       })
       .catch((err) => {
-        console.log(err);
+        setError(true);
       });
   };
 
@@ -44,6 +45,7 @@ const Login = ({ setIsLoggedIn, toggleLogin }: LoginProps) => {
       <h2>
         Welcome back! Please log in with your credentials to access your tasks.
       </h2>
+      {error && <h2>Login failed. Please try again later.</h2>}
       <form>
         <label htmlFor="username">Username</label>
         <input
