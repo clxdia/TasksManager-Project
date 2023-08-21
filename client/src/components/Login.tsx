@@ -22,7 +22,7 @@ const Login = ({ setIsLoggedIn, toggleLogin }: LoginProps) => {
     setNoUser(false);
     axios
       .post(process.env.MONGODB_URL + "/login", { name, password })
-      // .post(`http://localhost:3005` + "/login", { name, password })
+
       .then((result) => {
         if (result.data.message === "Correct data") {
           document.cookie = `token=${result.data.token}; path=/`;
